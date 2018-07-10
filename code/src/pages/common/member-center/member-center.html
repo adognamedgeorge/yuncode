@@ -1,0 +1,44 @@
+<!--
+  Generated template for the MemberCenterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>会员中心</ion-title>
+    <ion-buttons end>
+		<button ion-button [navPush]="'MemberEditPage'" small>
+			<ion-icon name="create" class="'memberEdit'"></ion-icon>
+			资料编辑
+		</button>
+	</ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+	<div>
+		<img src="http://i1.yunmayi.com/upload/2017/10/31/02a3e510416c5b6dc54ef1cae61f2d4f.pngXXXXX!!!!!_400x400.jpg">
+		<span class="vipNo">
+			NO:{{vipInfo['card_number']}}
+		</span>
+    <div class="barcodes" >
+      <img id="barcodes" />
+    </div>
+  </div>
+	<div class="list">
+		<ion-row>
+			<ion-col>
+				<p class="account">
+          {{vipInfo['card_consume_integral']}}
+        </p>
+				<p>我的积分</p>
+			</ion-col>
+			<ion-col col-6 [navPush]="'MemberExchangePage'">
+        <p>
+          <ion-icon name="swap"></ion-icon>
+        </p>
+				<p>积分兑换</p>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>

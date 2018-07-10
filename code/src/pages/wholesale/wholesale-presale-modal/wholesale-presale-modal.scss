@@ -1,0 +1,62 @@
+page-wholesale-presale-modal {
+  .card {
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd !important;
+    .item-block {
+      padding: 0;
+      border: 0 !important;
+      font-size: 1.4rem;
+    }
+    .item-inner {
+      padding-right: 0!important;
+      border: 0!important;
+    }
+
+    .presaleItemHead {
+      font-size: 1.4rem;
+      color: black;
+      padding-bottom: 5px;
+      min-height: 30px;
+      border-bottom: 1px solid #ddd !important;
+    }
+    .presaleItem {
+      padding-top: 10px;
+      p{
+        font-size: 1.4rem;
+        color: $antColor;
+        white-space: normal;
+      }
+      p:last-child,.itemInfo{
+        font-size: 1.3rem;
+        padding-bottom: 10px;
+        color: $fontColor;
+      }
+      .itemInfo {
+        padding-bottom: 0;
+      }
+    }
+  }
+  .tote {
+    display: inline-block;
+  }
+  .num, .plus {
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    width: 50px;
+  }
+  .num, .plus{
+    border: 1px solid gainsboro;
+  }
+  .num, .add, .mius{
+    background-color: white;
+    vertical-align: bottom;
+  }
+  .add {
+    color : red;
+  }
+  [col-4] {
+    line-height: 29px;
+  }
+}

@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>订单确认</ion-title>
+    <ion-buttons start>
+		<button ion-button color="danger" (tap)="closeModal()">
+        	关闭
+      	</button>
+	</ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-card>
+    <img [src]="appService.changeImgUrl(item['imageUrl'], 600)">
+    <ion-card-content>
+		    <ion-card-title>
+          {{item['title']}}
+		      </ion-card-title>
+      <p>{{item.point}}积分
+        <ion-badge item-end *ngIf="item.price > 0"> ¥{{item.price | pricePipe}}</ion-badge>
+        <ion-badge item-end *ngIf="item.payment > 0"> ¥{{item.payment | pricePipe}}</ion-badge>
+      </p>
+      <!--<p>限购:{{item.totalNum}}</p>-->
+      <p *ngIf="item.endTime">{{item.beginTime | limitTo: 11}} 至 {{item.endTime | limitTo: 11}}</p>
+    </ion-card-content>
+    <ion-item no-lines>
+      支付积分
+      <span item-end>{{item.point}}</span>
+    </ion-item>
+    <ion-item no-lines  *ngIf="item.price > 0 || item.payment > 0">
+      支付价格
+      <span item-end  *ngIf="item.price > 0">¥{{item.price | pricePipe}}</span>
+      <span item-end  *ngIf="item.payment > 0">¥{{item.payment | pricePipe}}</span>
+    </ion-item>
+	</ion-card>
+	<ion-card *ngIf="item.price > 0 || item.payment > 0">
+		<ion-card-header>
+	   		付款方式
+	  	</ion-card-header>
+
+	  	<ion-list radio-group [(ngModel)]="payPlatform">
+		    <ion-item>
+			    <ion-label>支付宝</ion-label>
+			    <ion-radio checked="true" value="alipay"></ion-radio>
+			</ion-item>
+			<ion-item>
+			    <ion-label>微信</ion-label>
+			    <ion-radio value="weixinpay"></ion-radio>
+			</ion-item>
+	  </ion-list>
+	</ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="danger" (tap)="exchange()">
+    <ion-title text-center *ngIf="!item.payment">立即兑换</ion-title>
+    <ion-title text-center *ngIf="item.payment >0">去支付</ion-title>
+  </ion-toolbar>
+</ion-footer>

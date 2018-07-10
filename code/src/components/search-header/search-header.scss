@@ -1,0 +1,16 @@
+search-header {
+  .head_button{
+    ion-icon{
+      left:11px
+    }
+    span{
+      left: 1px;
+    }
+  }
+  .back-button{
+    margin: 0;
+  }
+  .bar-button{
+    color: $fontColor !important;
+  }
+}

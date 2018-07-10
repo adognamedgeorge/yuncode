@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{info['shop_name']}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item class="dl">
+      <p>订单编号 : <span>{{info['id']}}</span></p>
+      <p>买家姓名 : <span> {{info.consignee_name}}</span></p>
+      <p>联系方式 : <span> {{info.consignee_mobile}}</span></p>
+      <p>收货地址 : <span> {{info.consignee_address}}</span></p>
+      <p>支付方式 :
+        <span *ngIf="info['pay_type'] == 'cod'">货到付款</span>
+        <span *ngIf="info['pay_type'] == 'online'">在线支付</span>
+      </p>
+      <p>买家备注 : <span> {{info.buyer_remark ? info.buyer_remark : "无备注"}}</span></p>
+      <p>订单时间 : <span> {{info.created_at}}</span></p>
+    </ion-item>
+    <ion-item class="dl" *ngFor="let item of info['orders']" >
+      <div class="contents">
+        <div class="dt">
+          <img [src]="appService.changeImgUrl(item.pic_url, 160)" />
+        </div>
+        <div class="dd">
+          <h3>{{item.title}}</h3>
+          <p class="price">
+            ¥{{item.price | pricePipe }}  x {{item.quantity}}
+          </p>
+          <p class="price allPrice">
+            <span>
+              实付：¥{{item.order_pay_price | pricePipe}}
+            </span>
+          </p>
+        </div>
+      </div>
+    </ion-item>
+    <ion-item class="dl">
+      <ion-row>
+        <ion-col col-4>
+          订单总金额
+        </ion-col>
+        <ion-col text-right>
+          ¥{{info.order_total_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          配送费
+        </ion-col>
+        <ion-col text-right>
+          ¥{{info.freight_fee | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="info['order_discount_price']">
+        <ion-col col-4>
+          优惠价
+        </ion-col>
+        <ion-col text-right>
+          ¥{{info.order_discount_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          实付
+        </ion-col>
+        <ion-col text-right class="price">
+          ¥{{info.order_pay_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-6>
+      <button ion-button color="golden" [full]>
+        <a href="tel:4000692666">
+          投诉商家
+        </a>
+      </button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button color="danger" [full]>
+        <a [href]="'tel:' + info.seller_mobile">
+          联系商家
+        </a>
+      </button>
+
+    </ion-col>
+  </ion-row>
+</ion-footer>

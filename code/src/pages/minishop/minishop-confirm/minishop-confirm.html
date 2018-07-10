@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>小店订单确认</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content (tap)="openAdreesModal()">
+      <ion-icon name="dingwei" color="danger"></ion-icon>
+      <div *ngIf="!addressId" margin-top>
+        <p >请选择地址</p>
+      </div>
+      <div *ngIf="addressId">
+        <p>{{addressInfo['name']}}</p>
+        <p>{{addressInfo.prov_name}}&nbsp;&nbsp;{{addressInfo.city_name}}&nbsp;&nbsp;{{addressInfo.district_name}}&nbsp;&nbsp;{{addressInfo.address}}</p>
+        <p *ngIf="!isInDeliveryRange" class="assertive">当前地址超出小店配送范围</p>
+      </div>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+  <ion-list radio-group  [(ngModel)]="payType" >
+    <ion-item-divider color="light">商品列表</ion-item-divider>
+    <ion-item  *ngFor="let item of getKeys(shopCart)">
+      <dl>
+        <dt>
+          <img [src]="appService.changeImgUrl(shopCart[item]['itemPicUrl'], 160)">
+        </dt>
+        <dd>
+          <h2>{{shopCart[item]['itemName']}}</h2>
+          <p color="danger">
+            ¥{{shopCart[item]['sellPrice'] | pricePipe}}
+            <span>X{{shopCart[item]['inCartQuantity']}}</span>
+          </p>
+        </dd>
+      </dl>
+    </ion-item>
+    <ion-item-divider color="light">支付方式</ion-item-divider>
+    <!--<ion-item (tap)="selectPayType('cod')" *ngIf="shopInfo['support_cod'] ==2">-->
+      <!--<ion-label>货到付款</ion-label>-->
+      <!--<ion-radio value="cod"></ion-radio>-->
+    <!--</ion-item>-->
+    <ion-item (tap)="selectPayType('online')" *ngIf="shopInfo['support_online'] ==2">
+      <ion-label>在线支付</ion-label>
+      <ion-radio value="online"></ion-radio>
+    </ion-item>
+    <ion-item-divider color="light">备注</ion-item-divider>
+    <ion-item><input type="text" placeholder="如有需求，请备注" [(ngModel)]="remark"></ion-item>
+    <ion-item-divider color="light" *ngIf="payType == 'online' && shopCoupon">可获得优惠券</ion-item-divider>
+    <ion-item class="price" *ngIf="payType == 'online' && shopCoupon" >
+      在线支付既得
+      <span>¥{{shopCoupon['denomination'] | pricePipe}} X {{shopCoupon['send_num']}}</span>
+    </ion-item>
+    <ion-item-divider color="light">结算明细</ion-item-divider>
+    <ion-item class="price">
+      总金额
+      <span>¥{{cartTotalPrice | pricePipe}}</span>
+    </ion-item>
+    <ion-item class="price">
+      配送费
+      <span>¥{{(shopInfo['delivery_fee'] > 0 ? shopInfo['delivery_fee'] : 0 )| pricePipe}}</span>
+    </ion-item>
+    <ion-item class="price" *ngIf=" reductionDecreaseAmount != 0 && payType == 'online'">
+      满就减
+      <span> -¥{{reductionDecreaseAmount | pricePipe}}</span>
+    </ion-item>
+    <ion-item class="price" *ngIf=" reductionDecreaseAmount != 0 && payType == 'online'" (tap)="openCouponModal()">
+      优惠券
+      <span *ngIf="isCoupon && useCoupon.length == 0 "> 暂无优惠券 </span>
+      <span *ngIf="!isCoupon">本店暂不支持使用优惠券</span>
+      <span *ngIf="isCoupon && useCoupon.length > 0 && payType == 'cod'">货到付款不支持优惠券</span>
+      <span *ngIf="isCoupon && useCoupon.length > 0 && payType == 'online' && !coupon['selected']"> {{useCoupon.length}}张可用 > &nbsp;</span>
+      <span *ngIf="isCoupon && coupon['selected'] && payType == 'online'"> -¥{{coupon['denomination'] | pricePipe}} &nbsp; ></span>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <span>应付: <i>¥{{costsPrice | pricePipe}}</i></span>
+    <ion-buttons end>
+      <button ion-button (click)="onlinePay()">去付款</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+<div class="backdrop" *ngIf="isBackdrop"></div>

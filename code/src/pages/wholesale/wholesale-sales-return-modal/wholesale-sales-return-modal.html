@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button clear (click)="modalClose()">取消</button>
+    </ion-buttons>
+    <ion-title mode="ios">查询结果</ion-title>
+  </ion-navbar>
+  <ion-row text-center class="goldHeader">
+    <ion-col col-3>业务员</ion-col>
+    <ion-col col-3>商品名称</ion-col>
+    <ion-col col-3>商品总价</ion-col>
+    <ion-col col-3>操作</ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <p *ngIf="items.length == 0">
+    没有查到您要信息，请修改搜索条件重新搜索！
+  </p>
+  <div  *ngFor="let item of items">
+    <ion-row text-center class="goldHeader">
+      <ion-col col-3>{{item['salesman_name']}}</ion-col>
+      <ion-col col-3>{{item['product_title']}}</ion-col>
+      <ion-col col-3>{{(item['origin_return_goods_number'] * item['product_sell_price']) | pricePipe}}元</ion-col>
+      <ion-col col-3>
+        <button ion-button small (click)="item['isShow'] = !item['isShow']" *ngIf="!item['isShow']">展</button>
+        <button ion-button color="light" small (click)="item['isShow'] = !item['isShow']" *ngIf="item['isShow']">收</button>
+      </ion-col>
+    </ion-row>
+    <ion-list no-lines *ngIf="item['isShow']">
+      <ion-item>
+        <span>订单编号：</span>
+        {{item['order_id']}}
+      </ion-item>
+      <ion-item>
+        <span>商品名称：</span>
+        {{item['product_title']}}
+      </ion-item>
+      <ion-item>
+        <span>实际退款总金额：</span>
+        {{(item['origin_return_goods_number'] * item['product_sell_price']) | pricePipe}}
+      </ion-item>
+      <ion-item>
+        <span>退货状态：</span>
+        <div [ngSwitch]=" item['state']" class="switch">
+          <b *ngSwitchCase="'0'">
+            全部
+          </b>
+          <b *ngSwitchCase="'1'">
+            待审核
+          </b>
+          <b *ngSwitchCase="'2'">
+            客服打回
+          </b>
+          <b *ngSwitchCase="'3'">
+            客服审核通过，待仓库审核
+          </b>
+          <b *ngSwitchCase="'4'">
+            仓库打回
+          </b>
+          <b *ngSwitchCase="'5'">
+            退货
+          </b>
+        </div>
+
+      </ion-item>
+      <ion-item>
+        <span>退货原因：</span>
+        {{item['return_goods_reason']}}
+      </ion-item>
+      <ion-item>
+        <span>退款状态：</span>
+        <div [ngSwitch]=" item['is_return']" class="switch">
+          <b *ngSwitchCase="'0'">
+            待退款
+          </b>
+          <b *ngSwitchCase="'1'">
+            已退款
+          </b>
+          <b *ngSwitchCase="'2'">
+            拒绝退款
+          </b>
+          <b *ngSwitchCase="'99'">
+            全部
+          </b>
+        </div>
+      </ion-item>
+      <ion-item>
+        <span>操作时间：</span>
+        {{item['apply_date_time']}}
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

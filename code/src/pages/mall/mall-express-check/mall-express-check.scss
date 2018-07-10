@@ -1,0 +1,83 @@
+page-mall-express-check {
+  .dl {
+    padding: 10px;
+    display: flex;
+    border-bottom: 5px solid $borderColor;
+  }
+  .dt{
+    width: 9.5rem;
+    img {
+      width: 9rem;
+      vertical-align: middle;
+      height: 9rem;
+    }
+  }
+  .dd {
+    flex: 1;
+    width: 0;
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 0;
+      white-space: normal;
+      span {
+        color: $antColor;
+      }
+    }
+  }
+
+  .logistics{
+    margin-top: 6px;
+    border:none;
+  }
+  .logistics-info li{
+    margin:15px 10px 15px 50px;
+    position: relative;
+    line-height: 25px;
+  }
+  .logistics-info p {
+    font-size: 14px;
+    border-bottom: none;
+    color:grey;
+    white-space: normal;
+  }
+  .logistics-info li:last-child{
+    border-bottom: 2px solid #dcdcdc;
+    margin:0;
+    padding:0 0 0 50px;
+  }
+  .logistics-info li:first-child p{
+    color: darkorange;
+  }
+  .logistics-info .logistics-line{
+    display: inline-block;
+    width:2px;
+    height:100%;
+    border-left: 2px solid #dcdcdc;
+    position:absolute;
+    left: -35px;
+    top:26px
+  }
+  .logistics-info li:last-child .logistics-line{
+    left: 14px;
+    height: 40%;
+  }
+  .logistics-info  .logistics-line span{
+    position: absolute;
+    width:15px;
+    height:15px;
+    display: inline-block;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    background: #dcdcdc;
+    top: -10px;
+    left: -8px;
+  }
+  .logistics-info li:first-child .logistics-line span{
+    width:20px;
+    height:20px;
+    background: darkorange;
+    border:2px solid #dcdcdc;
+    left: -10px;
+  }
+}

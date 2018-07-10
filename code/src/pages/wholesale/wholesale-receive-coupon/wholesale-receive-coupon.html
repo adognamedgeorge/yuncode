@@ -1,0 +1,92 @@
+<!--
+  Generated template for the WholesaleRecommendPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header  no-border>
+  <ion-navbar>
+    <ion-title mode="ios">领券中心</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        可领取
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        我的优惠券
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="'s0'">
+      <ion-card  *ngFor="let item of getKeys(couponItems) ">
+        <ion-card-content *ngIf="couponItems[item]['isGet'] == 0 && couponItems[item]['type'] != 1">
+          <div class="mycoupon_left">
+            <div class="info">
+              <div class="info_left">
+                <span>¥</span>
+                {{couponItems[item]['denomination'] / 100}}
+              </div>
+              <div class="info_right">
+                <p *ngIf="couponItems[item]['type'] == 2">{{couponItems[item]['brand']['name']}}品牌券</p>
+                <p *ngIf="couponItems[item]['type'] ==3">{{couponItems[item]['brand']['name']}}指定供应商券</p>
+                <p>满¥{{couponItems[item]['condition'] / 100}}可用</p>
+              </div>
+            </div>
+            <p class="time">截止至 {{couponItems[item]['end_time']}}</p>
+          </div>
+          <div class="mycoupon_right" (tap)="getCoupon(couponItems[item])">
+            可 <br>
+            领 <br>
+            取 <br>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'s1'">
+      <ion-card  *ngFor="let item of items">
+        <ion-card-content class="use" [ngClass]="{'noUse': item.used == 1 || item.used == 2}">
+          <div class="mycoupon_left">
+            <div class="info">
+              <div class="info_left">
+                <span>¥</span>
+                {{item.value / 100}}
+              </div>
+              <div class="info_right">
+                <p *ngIf="item.type == 1">优惠券</p>
+                <p *ngIf="item.type == 2">{{item['brand']['name']}}品牌券</p>
+                <p *ngIf="item.type == 3">{{item['vendor']['company']}}供应商券</p>
+                <p>满{{item.condition / 100}}可用</p>
+              </div>
+            </div>
+            <p class="time">截止至 {{item.endtime}}</p>
+          </div>
+          <div class="mycoupon_right" (tap)="useCoupon(item)" *ngIf="item.used == 0">
+            可 <br>
+            使 <br>
+            用 <br>
+          </div>
+          <div class="mycoupon_right" *ngIf="item.used == 1" (tap)="useCoupon(item)">
+            已 <br>
+            使 <br>
+            用 <br>
+          </div>
+          <div class="mycoupon_right" *ngIf="item.used == 2" (tap)="useCoupon(item)">
+            已 <br>
+            过 <br>
+            期 <br>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

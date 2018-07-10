@@ -1,0 +1,50 @@
+page-minishop-shop-info {
+
+  .price {
+    font-size: 1.4rem;
+    padding: 10px;
+    .col{
+      text-align: center;
+    }
+    .col:first-child {
+      border-right: 1px solid $borderColor1;
+    }
+    p {
+      color: $antColor;
+    }
+  }
+  .item {
+    font-size: 1.4rem;
+    span {
+      color: $fontColor;
+    }
+  }
+  .sale {
+    p {
+      font-size: 1.2rem;
+      color: $antColor;
+    }
+  }
+}
+  .share{
+    .action-sheet-title {
+      text-align: center !important;
+    }
+    ion-icon{
+      margin-right: 3px !important;
+    }
+
+  //.action-sheet-group {
+  //  button {
+  //    text-align: center !important;
+  //
+  //  }
+  //
+  //}
+  .action-sheet-group .button-inner {
+    justify-content: center;
+  }
+  .close {
+    color: $antColor;
+  }
+}

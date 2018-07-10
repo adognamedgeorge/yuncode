@@ -1,0 +1,132 @@
+page-mall-detail {
+
+  ion-slides {
+    height: auto;
+  }
+  .backdrop {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    bottom: 0;
+    z-index: 99;
+  }
+  .scroll-content {
+    padding-top:0 !important;
+  }
+  .homes .bar-button .button-inner{
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+  }
+  ion-header{
+    height: 44px !important;
+    .toolbar-background {
+      background-color: rgba(255, 0, 0, 0);
+
+    }
+    .head_button {
+      //background-color: rgba(0, 0, 0, 0.2);
+      //border-radius:100%;
+      //width: 30px;
+      //height: 30px;
+      //text-align: center;
+      ion-icon[name='gouwu2']{
+        font-size: 2rem;
+        position: initial;
+      }
+      .cart_num {
+        top: 0;
+        right: 1px;
+      }
+      span {
+        position: initial;
+      }
+
+    }
+  }
+  dl{
+    padding: 10px;
+    border-bottom: 10px solid $borderColor;
+  }
+  dt {
+    color: $fontColor;
+    h4 {
+      margin: 4px 0px;
+      font-size: 1.6rem;
+      color: black;
+    }
+    p {
+      margin-bottom: 5px;
+    }
+  }
+  ion-textarea {
+    padding: 16px;
+  }
+  textarea.text-input {
+    height: 150px;
+  }
+  .telNum {
+    color: $antColor;
+  }
+  .price {
+    span {
+      b {
+        font-size: 1.4rem;
+      }
+      color: $antColor;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+  ion-footer {
+    text-align: center;
+    border: 0;
+    ion-buttons {
+      margin: 0;
+    }
+    .toolbar {
+      padding: 0!important;
+    }
+    .toolbar-background {
+      background-color: white !important;
+    }
+    .col {
+      padding: 0;
+    }
+    div {
+      //width: 30%;
+      text-align: center;
+      background-color: white;
+    }
+    button {
+      margin: 0 !important;
+      width: 100px;
+      border-radius: 0!important;
+      min-height:44px;
+      color: white !important;
+    }
+    .bar-button-md {
+      height: 56px;
+    }
+    .gold {
+      background-color: #F4AD2A;
+    }
+    .red {
+      background-color: $antColor;
+    }
+    .title_foot {
+      font-size: 85%;
+      display: block;
+    }
+    .icon-ios {
+      font-size: 2.2rem;
+      padding-top: 4px;
+    }
+    .icon-md {
+      padding-top: 2px;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-hot-code-push-plugin": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-alipay-v2": {
+      "APP_ID": "2015121600986717",
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-appversion": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-wechat": {
+      "WECHATAPPID": "wx6f78c0964351ea05",
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.yunmayi.ios"
+    }
+  }
+}

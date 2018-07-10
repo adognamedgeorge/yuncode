@@ -1,0 +1,54 @@
+pifa-products {
+  .sort{
+    text-indent: 5px;
+    font-size: 1.2rem;
+    color: $fontColor;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  //.buy{
+  //  text-align: center;
+  //  width: 70px;
+  //  display: flex;
+  //  .buy_left, .buy_right{
+  //    width:2rem;
+  //    height: 2rem;
+  //    //line-height: 1.8rem;
+  //    font-size: 2rem;
+  //    background-color: $antColor;
+  //    -webkit-border-radius: 100%;
+  //    -moz-border-radius: 100%;
+  //    border-radius: 100%;
+  //    color: #fff;
+  //    font-weight: bold;
+  //  }
+  //  .buy_left{
+  //    font-size: 2.4rem;
+  //  }
+  //  .buy_center{
+  //    flex: 1;
+  //  }
+  //  input{
+  //    text-align: center;
+  //    width: 100%;
+  //  }
+  //}
+  .buy {
+    text-align: center;
+    button {
+      width: 90%;
+      background-color: transparent;
+      padding: 4px;
+      border-radius: 2px;
+      border: 1px solid $antColor;
+      color: $antColor;
+      margin-bottom: 10px;
+    }
+    .nobuy {
+      border-color: grey;
+      color: grey;
+    }
+  }
+}

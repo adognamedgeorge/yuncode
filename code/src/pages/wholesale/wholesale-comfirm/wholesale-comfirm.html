@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>批发订单确认</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-icon name="dingwei" color="danger"></ion-icon>
+      <div>
+        <p>{{userInfo.name}} {{userInfo.mobile}}</p>
+        <p>{{userInfo.provName}}&nbsp;&nbsp;{{userInfo.cityName}}&nbsp;&nbsp;{{userInfo.districtName}}&nbsp;&nbsp;{{userInfo.address}}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-list radio-group  [(ngModel)]="payType" >
+    <ion-item-divider color="light">商品列表</ion-item-divider>
+    <div *ngFor="let item of getKeys(groups)">
+      <p class="titles" >
+        订单由<b *ngIf = "!groups[item].isPlatform">供应商</b>
+        <b *ngIf = "groups[item].isPlatform">平台 </b>
+        <span> {{groups[item].deliverName}} </span>
+        提供配送
+      </p>
+      <div *ngFor="let cart of groups[item]['items']">
+        <ion-item>
+          <dl>
+            <dt>
+              <img [src]="appService.changeImgUrl(cart.picUrl, 160)">
+            </dt>
+            <dd>
+              <h2>{{cart.title}}</h2>
+              <p>{{cart.spec}}</p>
+              <p>{{cart.remark}}</p>
+              <p color="danger">
+                ¥{{cart.price | pricePipe}}
+                <span>X{{cart.quantity}}</span>
+              </p>
+            </dd>
+          </dl>
+        </ion-item>
+        <div *ngFor="let gift of cart.gifts">
+          <ion-item  *ngIf="!gift['isNear']">
+            <dl>
+              <dt>
+                <img [src]="appService.changeImgUrl(gift.picUrl, 160)">
+              </dt>
+              <dd>
+                <h2><span class="assertive">【单品送】</span>{{gift.title}}</h2>
+                <p>{{gift.unit}}</p>
+                <p>{{gift.remark}}</p>
+                <p color="danger">
+                  ¥{{0 | pricePipe}}
+                  <span>X{{gift.quantity}}</span>
+                </p>
+              </dd>
+            </dl>
+          </ion-item>
+        </div>
+      </div>
+      <div *ngFor="let giftItem of groups[item].gifts">
+        <ion-item  *ngIf="!giftItem.isNear && giftItem.promoCode == 'mjs'">
+          <dl>
+            <dt>
+              <img [src]="appService.changeImgUrl(giftItem.picUrl, 160)">
+            </dt>
+            <dd>
+              <h2><span class="assertive">【满就送】</span>{{giftItem.title}}</h2>
+              <p>{{giftItem.unit}}</p>
+              <p>
+                <span class="assertive">订单满 ¥{{giftItem.condition | pricePipe}} 赠品</span>
+              </p>
+              <p color="danger">
+                ¥{{0 | pricePipe}}
+                <span>X{{giftItem.quantity}}</span>
+              </p>
+            </dd>
+          </dl>
+        </ion-item>
+        <ion-item  *ngIf="!giftItem.isNear && giftItem.promoCode == 'brandMjs'">
+          <dl>
+            <dt>
+              <img [src]="appService.changeImgUrl(giftItem.picUrl, 160)">
+            </dt>
+            <dd>
+              <h2><span class="assertive">【品牌满就送】</span>{{giftItem.title}}</h2>
+              <p>{{giftItem.unit}}</p>
+              <p>
+                <span class="assertive">订单满 ¥{{giftItem.condition | pricePipe}} 赠品</span>
+              </p>
+              <p color="danger">
+                ¥{{0 | pricePipe}}
+                <span>X{{giftItem.quantity}}</span>
+              </p>
+            </dd>
+          </dl>
+        </ion-item>
+        <ion-item  *ngIf="!giftItem.isNear && giftItem.promoCode == 'vendorMjs'">
+          <dl>
+            <dt>
+              <img [src]="appService.changeImgUrl(giftItem.picUrl, 160)">
+            </dt>
+            <dd>
+              <h2><span class="assertive">【供应商满就送】</span>{{giftItem.title}}</h2>
+              <p>{{giftItem.unit}}</p>
+              <p>
+                <span class="assertive">订单满 ¥{{giftItem.condition | pricePipe}} 赠品</span>
+              </p>
+              <p color="danger">
+                ¥{{0 | pricePipe}}
+                <span>X{{giftItem.quantity}}</span>
+              </p>
+            </dd>
+          </dl>
+        </ion-item>
+      </div>
+    </div>
+    <ion-item-divider color="light">支付方式</ion-item-divider>
+    <ion-item (tap)="selectPayType(1)">
+      <ion-label>货到付款</ion-label>
+      <ion-radio value="1"></ion-radio>
+    </ion-item>
+    <ion-item (tap)="selectPayType(2)">
+      <ion-label>余额支付</ion-label>
+      <ion-radio value="2"></ion-radio>
+    </ion-item>
+    <ion-item-divider color="light">备注</ion-item-divider>
+    <ion-item><input type="text" placeholder="如有需求，请备注" [(ngModel)]="remark"></ion-item>
+    <ion-item-divider color="light">结算明细</ion-item-divider>
+    <ion-item class="price">
+      总金额
+      <span>¥{{total.originHuman}}</span>
+    </ion-item>
+    <ion-item class="price">
+      满就减
+      <span></span>
+      <span *ngIf = "payType == 2"> 余额付款 - ¥{{discountTotal.onlineMjjHuman }}</span>
+      <span *ngIf = "payType == 1"> 货到付款 - ¥{{discountTotal.codMjjHuman }}</span>
+    </ion-item>
+    <ion-item class="price" *ngIf="discountTotal.discountHuman != 0 ">
+      折扣
+      <span>- ¥{{discountTotal.discountHuman}}</span>
+    </ion-item>
+    <ion-item class="price" *ngIf="presalePrice">
+      云仓已付
+      <span>- ¥{{presalePrice | pricePipe}}</span>
+    </ion-item>
+    <ion-item-divider class="price" color="light" *ngIf="coupon1.length || coupon2.length || coupon3.length" (tap)="openCouponModal()">
+      优惠券
+      <span > >> &nbsp;</span>
+    </ion-item-divider>
+    <div *ngFor="let item of coupon1">
+      <ion-item *ngIf="item['selected']" class="price">
+        使用通用优惠券
+        <span >- ¥{{item['denomination'] | pricePipe}}</span>
+      </ion-item>
+    </div>
+    <ion-item class="price" *ngFor="let item of coupon2">
+      使用【<b>{{item.name}}</b>】品牌优惠券
+      <div *ngFor="let trade of item.list">
+        <span   *ngIf="trade['selected']">- ¥{{trade['denomination'] | pricePipe}}</span>
+      </div>
+    </ion-item>
+    <ion-item class="price"  *ngFor="let item of coupon3">
+      使用【<b>{{item.name}}</b>】供应商优惠券
+      <div *ngFor="let trade of item.list">
+        <span   *ngIf="trade['selected']">- ¥{{trade['denomination'] | pricePipe}}</span>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <span>应付: <i>¥{{blance | pricePipe}}</i></span>
+    <ion-buttons end>
+      <button ion-button (click)="onlinePay()">去付款</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+<div class="backdrop" *ngIf="isBackdrop"></div>

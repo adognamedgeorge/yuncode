@@ -1,0 +1,32 @@
+<ion-header class="homes"  no-border>
+  <ion-navbar>
+    <ion-title mode="ios">推荐商品</ion-title>
+    <!--<ion-buttons end >-->
+      <!--<button ion-button class="head_button"  [navPush]="WholesaleCartPage">-->
+        <!--<ion-icon name="gouwu2"></ion-icon>-->
+        <!--<i class="cart_num">5</i>-->
+        <!--<span>购物车</span>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="vm.selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        限时特价
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        新品推荐
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides centeredSlides="false" zoom="false" (ionSlideWillChange)="onSlideWillChange()">
+    <ion-slide>
+      <pifa-products [products]="speItems" [priceShow]="true"></pifa-products>
+    </ion-slide>
+    <ion-slide>
+      <pifa-products [products]="recItems" [priceShow]="true"></pifa-products>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

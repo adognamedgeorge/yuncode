@@ -1,0 +1,45 @@
+<ion-header no-border class="homes">
+  <ion-navbar #header>
+    <ion-buttons end >
+      <button ion-button class="head_button"  [navPush]="'WholesaleCartPage'">
+        <ion-icon name="gouwu2"></ion-icon>
+        <i class="cart_num">{{cartInfo.count}}</i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen #content>
+  <ion-slides #ionSlides  loop="true" speed="2000" pager="true" autoplay="3000" *ngIf=" imageList.length >= 1 " >
+    <ion-slide *ngFor='let item of imageList'>
+      <img src="{{item}}">
+    </ion-slide>
+  </ion-slides>
+  <dl>
+    <dt>
+      <h4>{{itemList.title}}</h4>
+      <p>{{itemList.sub_title}}</p>
+      <p class="price">
+        <span><b>¥ </b>{{itemList.sell_price | pricePipe}}</span> / {{itemList.unit}}
+      </p>
+      <p>{{itemList.spec}}</p>
+    </dt>
+  </dl>
+  <ion-textarea placeholder="商品规格备注" [(ngModel)]="remark" ></ion-textarea>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <p (tap)="tack()" *ngIf="!isTack">
+      <ion-icon  name="shoucang" color="dark"></ion-icon>
+      <span class="title_foot">收藏</span>
+    </p>
+    <p (tap)="untack()" *ngIf="isTack">
+      <ion-icon  name="yishoucang"></ion-icon>
+      <span class="title_foot">已收藏</span>
+    </p>
+    <ion-buttons end>
+      <button ion-button [full] color="danger" (click)="addCart()" *ngIf="itemStockInfo['stock'] >= itemList['min_sold_num'] || itemStockInfo['warehouse_stock'] >= itemList['min_sold_num']">加入购物车</button>
+      <button class="noCart" ion-button [full] color="light" *ngIf="!(itemStockInfo['stock'] >= itemList['min_sold_num'] || itemStockInfo['warehouse_stock'] >= itemList['min_sold_num'])">售罄</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+<!--<div class="backdrop" *ngIf="isBackdrop"></div>-->

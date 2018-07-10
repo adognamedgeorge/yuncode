@@ -1,0 +1,39 @@
+<!--
+  Generated template for the MemberEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>会员资料编辑</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>姓名<span>*</span>:</ion-label>
+    <ion-input type="text" [(ngModel)]="userinfo.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>手机号<span>*</span>:</ion-label>
+    <ion-input type="text" [(ngModel)]="userinfo.mobile" clearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>性别:</ion-label>
+    <ion-select [(ngModel)]="userinfo.sex" okText="确认" cancelText="取消">
+          <ion-option value="1">男</ion-option>
+          <ion-option value="2">女</ion-option>
+      </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>身份证号:</ion-label>
+    <ion-input type="text" [(ngModel)]="userinfo.idNumber" clearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>生日:</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="userinfo.birthday" cancelText="取消" doneText="确认"></ion-datetime>
+  </ion-item>
+	<button ion-button block (click)="save()" margin-top>保存</button>
+</ion-content>

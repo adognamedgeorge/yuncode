@@ -1,0 +1,111 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-title mode="ios">积分：{{yueManage.integral}}</ion-title>
+    <ion-buttons right [navPush]="'WholesaleExplainPage'" [navParams]="{id:1}">
+      <button ion-button icon-only>
+        <ion-icon name="help-circle" color="danger"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        积分兑换
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        积分明细
+      </ion-segment-button>
+      <ion-segment-button value="s2" (ionSelect)="goToSlide(2)">
+        我的兑换
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-row text-center class="goldHeader" *ngIf="selectedSegment == 's1'">
+    <ion-col col-3>时间</ion-col>
+    <ion-col col-3>记录</ion-col>
+    <ion-col col-3>积分</ion-col>
+    <ion-col col-3>备注</ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="'s0'" class="exchange">
+      <div *ngIf="isShow">
+        <img src="http://i1.yunmayi.com/upload/2016/09/12/63aa8badcb1888ead51fe09577603454.jpg">
+      </div>
+      <div *ngIf="!isShow">
+        <ion-card  *ngFor="let item of getKeys(gitManageItem)" >
+          <ion-card-content>
+            <div class="left">
+              <img *ngIf="gitManageItem[item].type != 1" [src]="appService.changeImgUrl(gitManageItem[item]['source']['pic_url'], 160)">
+              <div *ngIf="gitManageItem[item].type == 1">
+                ¥{{gitManageItem[item]['source']['denomination'] / 100}}
+              </div>
+            </div>
+            <div class="right" *ngIf="gitManageItem[item].type != 1">
+              <h3>{{gitManageItem[item].title}}</h3>
+              <p class="condition">{{gitManageItem[item]['condition']}}积分</p>
+              <ion-buttons text-right>
+                <button ion-button small (click)="exchange(gitManageItem[item])">兑换</button>
+              </ion-buttons>
+            </div>
+            <div class="right" *ngIf="gitManageItem[item].type == 1">
+              <h3>优惠券</h3>
+              <p>
+                满{{gitManageItem[item]['source']['condition'] | pricePipe}} 可用
+              </p>
+              <p class="condition">{{gitManageItem[item]['condition']}}积分</p>
+              <ion-buttons text-right>
+                <button ion-button small (click)="exchange(gitManageItem[item])">兑换</button>
+              </ion-buttons>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngSwitchCase="'s1'"  class="detail_list">
+      <ion-row text-center *ngFor="let item of items">
+        <ion-col col-3>{{item.created}}</ion-col>
+        <ion-col col-3>{{item.action}}</ion-col>
+        <ion-col col-3>
+          <span *ngIf="item.type == 1">+</span>
+          <span *ngIf="item.type != 1">-</span>
+          {{item.quantity}}
+        </ion-col>
+        <ion-col col-3>{{item.desc}}</ion-col>
+      </ion-row>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngSwitchCase="'s2'"  class="exchange">
+      <ion-card  *ngFor="let item of items">
+        <ion-card-content [ngClass]="{'useDisabled': item.is_receive ==='已领取' || item.expire < today}">
+          <div class="left">
+            <img *ngIf="item.gift_type == 2" [src]="appService.changeImgUrl(item.gift_info.pic_url, 160)">
+            <div *ngIf="item.gift_type == 1" class="values">
+              ¥{{item['gift_info']['value'] / 100}}
+            </div>
+          </div>
+          <div class="right" >
+            <h3 *ngIf="item.gift_type == 2">{{item.gift_info.title}}</h3>
+            <p *ngIf="item.gift_type == 1">
+              满{{item['gift_info']['condition'] | pricePipe}} 可用
+            </p>
+            <p *ngIf="item.is_receive ==='未领取'">已领取</p>
+            <p>过期时间 <span>{{item.expire}}</span></p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

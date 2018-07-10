@@ -1,0 +1,64 @@
+page-mall-order-detail {
+  .list-md {
+    margin: 0;
+  }
+  .dl {
+    padding-left: 0;
+  }
+  .dl .item-inner {
+    padding-right: 0 !important;
+    border-color: $borderColor !important;
+  }
+  .dl ion-label{
+    padding: 10px;
+    margin: 0;
+  }
+  .contents {
+    display: flex;
+  }
+  .dt{
+    width: 9.5rem;
+    img {
+      width: 9rem;
+      vertical-align: middle;
+      height: 9rem;
+    }
+  }
+  .dd{
+    flex: 1;
+    width: 0;
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 0;
+      //text-overflow: ellipsis;
+      white-space: normal;
+      //overflow: hidden;
+    }
+    .price{
+      font-size: 1.3rem;
+      color: $antColor;
+      margin-bottom: 0.5rem;
+    }
+    .allPrice {
+      display: inline-block;
+    }
+    .buy{
+      text-align: right;
+      float: right;
+      button{
+        font-size: 1.2rem;
+        background-color: $antColor;
+        color: #fff;
+        font-weight: bold;
+        margin: 0;
+        padding: 10px;
+      }
+    }
+  }
+  .row {
+    font-size:1.4rem;
+    .allPrice {
+      color: $antColor;
+    }
+  }
+}

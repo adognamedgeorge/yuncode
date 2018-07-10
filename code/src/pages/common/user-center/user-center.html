@@ -1,0 +1,156 @@
+<ion-content fullscreen>
+  <div class="center_header">
+    <i class="versions"  *ngIf="version">版本号:{{version}}</i>
+    <ion-row class="header">
+      <ion-col col-3>
+        <span class="cssSprite headerImg1" *ngIf="isLogin"></span>
+        <span class="cssSprite headerImg2" *ngIf="!isLogin"></span>
+      </ion-col>
+      <ion-col col-6 text-left>
+        <p *ngIf="!isLogin" (tap)="login()">登录</p>
+        <p *ngIf="isLogin && !isWholesaleUser" >{{userInfo['username']}}</p>
+        <p *ngIf="isLogin && isWholesaleUser" class="isWholesaleUser">
+          <b>{{wholesaleUserInfo['name']}}</b>
+          <b>{{wholesaleUserInfo['number']}}</b>
+        </p>
+      </ion-col>
+      <ion-col col-3 text-right [navPush]="'ChangePasswordPage'">
+        <p>账户管理 &#62; </p>
+      </ion-col>
+    </ion-row>
+    <div class="barcodes" (tap)="go('MemberCenterPage',2)" *ngIf="isLogin">
+        <img id="barcode" #barcode  />
+    </div>
+  </div>
+  <ion-list no-lines>
+    <ion-item class="item_title">
+      <i class="cssSprite title_icon title_icon1"></i>
+      我的订单
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col col-4  (tap)="go('MallOrderPage',2)">
+          <i class="cssSprite icon c1"></i>
+          <span class="title_foot">商城订单</span>
+        </ion-col>
+        <ion-col col-4  (tap)="go('WholesaleOrderPage',1)">
+          <i class="cssSprite icon c2"></i>
+          <span class="title_foot">批发订单</span>
+        </ion-col>
+        <ion-col col-4  (tap)="go('MinishopOrderPage',2)">
+          <i class="cssSprite icon c3"></i>
+          <span class="title_foot">小店订单</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-item class="item_title">
+      <i class="cssSprite title_icon title_icon2"></i>
+      我的账户
+    </ion-item>
+    <ion-item bottom-line>
+      <ion-row>
+        <ion-col col-3 (tap)="go('WholesaleBalanceDetailPage',1)">
+          <i class="num_icon">{{yueManageBalance | pricePipe}}</i>
+          <span class="title_foot">账户余额</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('GoldDetailPage',2)">
+          <i class="num_icon">{{goldCash | pricePipe}}</i>
+          <span class="title_foot">蚂蚁金币</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('UserMarketingPage',2)">
+          <i class="num_icon">{{marketingNum}}</i>
+          <span class="title_foot">商品推广</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('UserMarketingDetailPage',2)">
+          <i class="num_icon">{{markertingCash | pricePipe}}</i>
+          <span class="title_foot">推广佣金</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item bottom-line>
+      <ion-row>
+        <ion-col col-3  (tap)="go('MemberCenterPage',2)">
+          <i class="cssSprite iconCenter ic2"></i>
+          <span class="title_foot">连锁会员</span>
+        </ion-col>
+        <ion-col col-3  (tap)="go('UserAllCouponPage',2)">
+          <ion-icon name="youhuiquan" class="iconCenter fontIcon" color="golden"></ion-icon>
+          <span class="title_foot">优惠券</span>
+        </ion-col>
+        <ion-col col-3 (click)="openAdreesModal()">
+          <i class="cssSprite iconCenter ic1"></i>
+          <span class="title_foot">收货地址</span>
+        </ion-col>
+        <ion-col col-3  (tap)="go('UserFeedbackPage',2)">
+          <i class="cssSprite iconCenter ic3"></i>
+          <span class="title_foot">意见反馈</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-item class="item_title">
+      <i class="cssSprite title_icon title_icon3"></i>
+      批发账户
+    </ion-item>
+    <ion-item bottom-line>
+      <ion-row>
+        <ion-col col-3 (tap)="go('WholesaleAntCardPage',1)">
+          <i class="cssSprite iconCenter ic4"></i>
+          <span class="title_foot">蚂蚁云卡</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesalePresaleListPage',1)">
+          <ion-icon name="qiandai" class="iconCenter fontIcon" color="golden"></ion-icon>
+          <span class="title_foot">预售活动</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesaleRecommendPage',1)">
+          <i class="cssSprite iconCenter ic5"></i>
+          <span class="title_foot">推荐商品</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesaleAlwaysBuyPage',1)">
+          <i class="cssSprite iconCenter ic6"></i>
+          <span class="title_foot">我常购买</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item bottom-line>
+      <ion-row>
+        <ion-col col-3 (tap)="go('WholesaleReceiveCouponPage',1)">
+          <ion-icon name="youhuiquan1" class="iconCenter fontIcon" color="golden"></ion-icon>
+          <span class="title_foot">领券中心</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesaleIntegralManagePage',1)">
+          <i class="cssSprite iconCenter ic8"></i>
+          <span class="title_foot">积分中心</span>
+        </ion-col>
+        <ion-col col-3  (tap)="go('WholesaleBalanceManagePage',1)">
+          <i class="cssSprite iconCenter ic9"></i>
+          <span class="title_foot">余额管理</span>
+        </ion-col>
+        <ion-col col-3  (tap)="go('WholesaleBalanceConvertPage',1)">
+          <i class="cssSprite iconCenter ic10"></i>
+          <span class="title_foot">余额兑换</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col col-3 (tap)="go('WholesaleNewsPage',1)">
+          <i class="cssSprite iconCenter ic11"></i>
+          <span class="title_foot">公告信息</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesaleSalesReturnPage',1)">
+          <i class="cssSprite iconCenter ic12"></i>
+          <span class="title_foot">退货查询</span>
+        </ion-col>
+        <ion-col col-3 (tap)="go('WholesaleMyTaskPage',1)">
+          <i class="cssSprite iconCenter ic13"></i>
+          <span class="title_foot">我的收藏</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="logout()" *ngIf="isLogin">退出登陆</button>
+</ion-content>

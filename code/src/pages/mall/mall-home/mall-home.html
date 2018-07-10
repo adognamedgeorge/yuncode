@@ -1,0 +1,98 @@
+<ion-header no-border class="homes">
+  <ion-navbar #header>
+    <ion-buttons left>
+      <button ion-button class="head_button" (tap)="openMenu()">
+        <ion-icon name="sort1"></ion-icon>
+        <span class="sort_title">分类</span>
+      </button>
+    </ion-buttons>
+    <div start class="search_nav" [navPush]="'MallSearchPage'">
+      <ion-icon name="search"></ion-icon>
+      <input type="text"  disabled  placeholder="搜索"/>
+    </div>
+    <ion-buttons end>
+      <button ion-button class="head_button" [navPush]="MallCartPage">
+        <ion-icon name="gouwu2"></ion-icon>
+        <i class="cart_num">{{cartNum}}</i>
+        <span>购物车</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScroll)="scrollEvent($event)" #mycontents>
+  <ion-slides autoplay="3000" loop="true"  speed="2000" pager="true" *ngIf="slides.length >= 1">
+    <ion-slide *ngFor='let item of slides' (click)="goDetaile(item['itemId'])" >
+      <img [src]="appService.changeImgUrl(item.image, 700)">
+    </ion-slide>
+  </ion-slides>
+  <ion-categories [categories]="categories"></ion-categories>
+  <div class="publicity">
+    <ion-row *ngIf="MallAdvertising0">
+      <ion-col col-6 text-center tappable class="col" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising0['itemId']}">
+        <img  src="{{MallAdvertising0['image']}}">
+      </ion-col>
+      <ion-col col-6 class="col">
+        <ion-row *ngIf="MallAdvertising1" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising1['itemId']}">
+          <img src="{{MallAdvertising1['image']}}">
+        </ion-row>
+        <ion-row  *ngIf="MallAdvertising2" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising2['itemId']}">
+          <img src="{{MallAdvertising2['image']}}">
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="MallAdvertising3" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising3['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising3['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising4" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising4['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising4['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising5" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising5['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising5['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising6" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising6['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising6['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="MallAdvertising7" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising7['itemId']}">
+      <ion-col>
+        <img  src="{{MallAdvertising7['image']}}">
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-item-divider class="t-header" color="light" text-center *ngIf="recommendList.length > 0">
+    <ion-icon name="heart" color="danger"></ion-icon>
+    推荐商品
+  </ion-item-divider>
+  <mall-products [products]="recommendList"></mall-products>
+  <ion-item-divider class="t-header" color="light" text-center *ngIf="products.length > 0">
+    <ion-icon name="list" color="danger"></ion-icon>
+    商品列表
+  </ion-item-divider>
+  <mall-products [products]="products" [mallHome]="true"></mall-products>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+    <ion-infinite-scroll-content
+    loadingText="加载中..."
+    [loadingSpinner]="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+<ion-menu type="overlay" side="left" edge-drag-threshold="0"  [content]="mycontents" class="mallHomeMenu" id="mallHomeMenu" >
+  <ion-content >
+    <ion-list no-line>
+      <!--<button ion-item *ngFor="let item of pIdList" (click)="itemSelected(item)">-->
+        <!--{{item['system_name']}}-->
+      <!--</button>-->
+      <ion-item *ngFor="let item of pIdList" [navPush]="'MallSearchPage'" [navParams]="{'id':item['category_id']}">
+        {{item['system_name']}}
+        <ion-icon name="jiantouyou" item-end></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

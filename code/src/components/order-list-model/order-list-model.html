@@ -1,0 +1,115 @@
+<ion-list *ngIf="orderType.type == 'wholesale'">
+  <ion-item *ngFor="let trade of products" >
+    <div class="order_title"  [navPush]="'WholesaleOrderDetailPage'" [navParams]="{'id': trade.order_id}">
+      订单编号：{{trade.order_id}}
+      <ion-icon name="jiantouyou" item-end></ion-icon>
+    </div>
+    <div *ngFor="let item of trade['order_detail_list']; index as i"   [navPush]="'WholesaleOrderDetailPage'" [navParams]="{'id': trade.order_id}">
+      <dl *ngIf="i == 0">
+        <dt>
+          <img [src]="appService.changeImgUrl(item.product_image, 160)">
+        </dt>
+        <dd>
+          <div class="order_info">
+            <h3>{{item.product_title}}</h3>
+            <span *ngIf="trade['order_detail_list'].length > 1">等{{trade['order_detail_list'].length}}样商品</span>
+            <p>{{trade.create_datetime}}</p>
+          </div>
+          <div class="order_status" text-right>
+            <p>¥{{trade.origin_total_sell_price | pricePipe}}</p>
+            <p *ngIf="trade.state == 1">待发货</p>
+            <p *ngIf="trade.state == 2">待收货</p>
+            <p *ngIf="trade.state == 3">交易已完成</p>
+            <p *ngIf="trade.state == 4">申请取消</p>
+            <p *ngIf="trade.state == 5">订单已取消</p>
+          </div>
+        </dd>
+      </dl>
+    </div>
+    <div text-right>
+      <button ion-button small color="light" *ngIf="trade.state == 1" (tap)="wholesaleCancel(trade['order_id'])">取消订单</button>
+      <button ion-button small color="danger" (tap)="wholesaleBuyAgain(trade['order_id'])">再来一单</button>
+    </div>
+  </ion-item>
+</ion-list>
+<ion-list *ngIf="orderType.type == 'mall'">
+  <ion-item *ngFor="let trade of products" >
+    <div class="order_title"  [navPush]="'MallOrderDetailPage'" [navParams]="{'id': trade.id}">
+      订单编号：{{trade.id}}
+      <ion-icon name="jiantouyou" item-end></ion-icon>
+    </div>
+    <div *ngFor="let item of trade['orders']; index as i"  [navPush]="'MallOrderDetailPage'" [navParams]="{'id': trade.id}">
+      <dl *ngIf="i == 0">
+        <dt>
+          <img [src]="appService.changeImgUrl(item.imageUrl, 160)">
+        </dt>
+        <dd>
+          <div class="order_info">
+            <h3>{{item.title}}</h3>
+            <span *ngIf="trade['orders'].length > 1">等{{trade['orders'].length}}样商品</span>
+            <p>{{trade.createTime}}</p>
+          </div>
+          <div class="order_status" text-right>
+            <p>¥{{trade.payment | pricePipe}}</p>
+            <p *ngIf="trade.status == 1 || trade.state == 2">未付款</p>
+            <p *ngIf="trade.status == 2 || trade.status == 3 || trade.status == 4">待收货</p>
+            <p *ngIf="trade.status == 5">交易已完成</p>
+            <p *ngIf="trade.status == 6">交易取消</p>
+            <p *ngIf="trade.refundStatus == 99 && trade.status == 7">退款完成</p>
+            <p *ngIf="trade.refundStatus == 2|| trade.refundStatus ==3 && trade.status == 7">退款中</p>
+            <p *ngIf="trade.refundStatus != 99 && trade.refundStatus != 2&&trade.refundStatus != 3&&trade.status == 7">订单关闭</p>
+          </div>
+        </dd>
+      </dl>
+    </div>
+    <div text-right>
+      <button ion-button small color="light" *ngIf="trade.status == 2" (tap)="mallCancel(trade['id'], 2)">申请取消</button>
+      <button ion-button small color="light" *ngIf="trade.status == 1" (tap)="mallCancel(trade['id'], 1)">关闭订单</button>
+      <button ion-button small color="light" *ngIf="trade.status == 1" (tap)="mallpaying(trade['id'])">去付款</button>
+      <button ion-button small color="danger" *ngIf="trade.status != 1" (tap)="mallBuyAgain(trade['orders'])">再来一单</button>
+    </div>
+  </ion-item>
+</ion-list>
+<ion-list *ngIf="orderType.type != 'minishop1'">
+  <ion-item *ngFor="let trade of products" >
+    <div class="order_title" [navPush]="'MinishopShopPage'" [navParams]="{'shopId': trade['shop_id']}">
+      {{trade.shop_name}}
+      <ion-icon name="jiantouyou" item-end></ion-icon>
+    </div>
+    <dl [navPush]="'MinishopOrderDetailPage'" [navParams]="{'tradeId': trade['id']}">
+      <dt>
+        <img src="http://dd.v2.yunmayi.com/app_sources/img/home/shop-logo.jpg" />
+      </dt>
+      <dd>
+        <div class="order_info">
+          <h3>{{trade.item_name}}</h3>
+          <span *ngIf="trade['order_num'] > 1">等{{trade['order_num']}}样商品</span>
+          <span *ngIf="trade['order_num'] == 1">&nbsp;</span>
+          <p>{{trade.created_at}}</p>
+        </div>
+        <div class="order_status" text-right>
+          <p>¥{{trade.order_pay_price | pricePipe}}</p>
+          <p *ngIf="trade.status == 1 && trade.refund_status == 1">未付款</p>
+          <p *ngIf="trade.status == 2 && trade.refund_status == 1">待接单</p>
+          <p *ngIf="trade.status == 3 && trade.refund_status == 1">待配送</p>
+          <p *ngIf="trade.status == 4 && trade.refund_status == 1">买家确认中</p>
+          <p *ngIf="trade.status == 5 && trade.refund_status == 1">交易已完成</p>
+          <p *ngIf="trade.status == 6 && trade.refund_status == 1">交易已关闭</p>
+          <p *ngIf="trade.status == 7 && trade.refund_status == 1">交易已关闭</p>
+          <p *ngIf="trade.refund_status == 2">订单已取消</p>
+          <p *ngIf="trade.refund_status == 2">商家取消</p>
+          <p *ngIf="trade.refund_status == 2">退款完成</p>
+        </div>
+      </dd>
+    </dl>
+    <div text-right>
+      <button ion-button small color="light" *ngIf="trade.status == 1  && trade.refund_status == 1" (tap)="minShopPaying(trade['id'])">付款</button>
+      <button ion-button small color="light" *ngIf="trade.refund_status == 1 && trade.status == 2 || trade.refund_status == 1 && trade.status == 1" (tap)="minShopCancel(trade['id'])">取消订单</button>
+      <button ion-button small color="light" *ngIf="trade.buyer_rate == 0 && trade.buyer_can_rate == 1 && trade.status == 5" (tap)="minShopGoRate(trade['id'])">评价</button>
+      <button ion-button small color="danger" *ngIf="trade.status == 4  && trade.refund_status == 1" (tap)="minShopConfirm(trade['id'])">确认收货</button>
+      <button ion-button small color="danger" [navPush]="'MinishopShopPage'" [navParams]="{'shopId': trade['shop_id'], 'buyAgain': true, 'buyAgainTrade': trade}">再来一单</button>
+    </div>
+  </ion-item>
+</ion-list>
+
+

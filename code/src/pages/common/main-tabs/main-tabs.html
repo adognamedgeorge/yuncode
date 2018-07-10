@@ -1,0 +1,13 @@
+<!--
+  Generated template for the MainTabsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-tabs #mainTabs>
+  <ion-tab [root]="home" tabTitle="首页" tabIcon="myshouye" ></ion-tab>
+  <ion-tab [root]="minishopHome" tabTitle="小店" tabIcon="xiaodian"></ion-tab>
+  <ion-tab [root]="wholesaleHome" tabTitle="批发" tabIcon="gouwu1" [enabled]="isWholesaleUser"></ion-tab>
+  <ion-tab [root]="mallHome" tabTitle="商城" tabIcon="gouwu"></ion-tab>
+  <ion-tab [root]="userCenter" tabTitle="我的" tabIcon="wode"></ion-tab>
+</ion-tabs>

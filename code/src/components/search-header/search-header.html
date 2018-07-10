@@ -1,0 +1,15 @@
+<!-- Generated template for the SearchHeaderComponent component -->
+<ion-navbar >
+  <form action="javascript:return true;" start class="search_nav">
+    <ion-icon name="search"></ion-icon>
+    <input type="search" placeholder="请输入要搜索的词">
+    <ion-icon name="close-circle"></ion-icon>
+    <button (click)="search()"></button>
+  </form>
+  <ion-buttons end >
+    <button ion-button (tap)="searchStatusChange()" class="head_button">
+      <ion-icon name="qr-scanner"></ion-icon>
+      <span>扫一扫</span>
+    </button>
+  </ion-buttons>
+</ion-navbar>

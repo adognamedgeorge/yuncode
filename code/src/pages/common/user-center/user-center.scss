@@ -1,0 +1,194 @@
+page-user-center {
+  p{
+    color: #fff;
+  }
+  .row {
+    text-align: center;
+  }
+  .center_header {
+    width: 100%;
+    height: 180px;
+    background: url(http://pifa.yunmayi.com/upload/2017/11/23/a2ec53847ada5e5012e665803016b42a.png) no-repeat 0 0 / 100% 65%;
+  }
+  .header{
+    height: 100px;
+    b {
+      display: block;
+    }
+    span{
+      position: absolute;
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      top: 20px;
+      left: 10px;
+    }
+    .headerImg1 {
+      background: {
+        position: -1184px 0px;
+        size: 1300px;
+      };
+    }
+    .headerImg2 {
+      background: {
+        position: -1117px 0px;
+        size: 1300px;
+      };
+    }
+    .col {
+      padding: 0;
+      p{
+        margin: 36px 0 0 ;
+        padding: 10px 10px 10px 0;
+      }
+      .isWholesaleUser {
+        padding: 0;
+      }
+    }
+    [col-3] {
+      p {
+        padding:5px 5px;
+        background-color: #e62d2d;
+        border-bottom-left-radius: 100px;
+        border-top-left-radius: 100px;
+      }
+    }
+  }
+
+  .barcodes {
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    img {
+      width: 90%;
+      height: 70px;
+      //margin-top: -35px;
+    }
+  }
+  ion-list {
+    border-top: 10px solid $borderColor;
+  }
+  .item-block {
+    padding-left: 10px;
+  }
+  .item_title ion-label{
+    margin-bottom: 0;
+    //font-size: 90%;
+  }
+  .title_foot {
+    font-size: 85%;
+    display: block;
+    //margin-top: 5px;
+  }
+  .icon {
+    border-radius: 100px;
+    width: 46px;
+    height: 46px;
+    background-size: 2000px;
+  }
+  .c1 {
+    background-position: -111px 0;
+  }
+  .c2 {
+    background-position: -213px 0;
+  }
+  .c3 {
+    background-position: -59px 0;
+  }
+  .title_icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: 1200px;
+    vertical-align: middle;
+  }
+  .title_icon1 {
+    background-position: -377px 0;
+  }
+  .title_icon2 {
+    background-position: -320px 0;
+  }
+  .title_icon3 {
+    background-position: -544px -3px;
+  }
+  .title_foot {
+    display: block;
+    font-size: 1.2rem;
+  }
+  .iconCenter, .num_icon{
+    display: inline-block;
+    height: 26px;
+  }
+  .num_icon {
+    color: $antColor;
+    width: 100%;
+  }
+  .iconCenter {
+    width: 26px;
+    background-size: 2000px;
+  }
+  .ic1 {
+    background-position: -566px 0;
+  }
+  .ic2 {
+    background-position: -596px 5px;
+  }
+  .ic3, .ic4, .ic5, .ic6, .ic7, .ic8, .ic9, .ic10, .ic11, .ic12, .ic13{
+    background-size: 1300px;
+  }
+  .ic3 {
+    background-position: -850px 0;
+  }
+  .ic4 {
+    background-position: -616px 0;
+  }
+  .ic5 {
+    background-position: -560px 0;
+  }
+  .ic6 {
+    background-position: -764px 0;
+  }
+  .ic7 {
+    background-position: -616px 0;
+  }
+  .ic8 {
+    background-position: -530px 0;
+  }
+  .ic9 {
+    background-position: -705px 0;
+  }
+  .ic10 {
+    background-position: -791px 0;
+  }
+  .ic11 {
+    background-position: -733px 0;
+  }
+  .ic12 {
+    background-position: -674px 0;
+  }
+  .ic13 {
+    background-position: -452px 0;
+  }
+  .fontIcon {
+    height: 29px;
+  }
+  ion-icon[name='youhuiquan'] {
+    padding-top: 6px;
+  }
+  ion-icon[name='qiandai'] {
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  // ios 样式
+  .list-ios  {
+    margin: 0;
+  }
+  .versions {
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    font-size: 1rem;
+  }
+}

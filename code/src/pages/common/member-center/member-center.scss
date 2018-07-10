@@ -1,0 +1,44 @@
+page-member-center{
+	.vipNo {
+    position: absolute;
+    top: 7vw;
+    right: 12vw;
+    text-decoration: none;
+    font-size: 4vw;
+    color: white;
+  }
+  .barcodes {
+    height: 75px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    img {
+      width: 90%;
+      height: 70px;
+    }
+  }
+	.memberEdit{
+		margin-right:3px;
+	}
+	.list{
+    font-size: 1.4rem;
+    p{
+      height: 30px;
+      line-height: 30px;
+    }
+    ion-icon[name='swap']{
+      font-size: 25px;
+    }
+		ion-col{
+      padding-top: 10px;
+			text-align:center;
+      border-top:5px solid #eee ;
+
+    }
+		.account, ion-icon[name='swap'] {
+      line-height: 40px;
+      color: $antColor;
+		}
+
+	}
+}

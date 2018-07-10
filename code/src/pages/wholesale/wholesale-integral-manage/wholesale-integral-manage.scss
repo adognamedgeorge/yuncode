@@ -1,0 +1,84 @@
+page-wholesale-integral-manage {
+  ion-header {
+    ion-row {
+      border-bottom: 1px solid $borderColor1;
+    }
+  }
+  .toolbarheader .toolbar-background {
+    background-color: white;
+  }
+  .goldHeader {
+    z-index: 999;
+    background-color: white;
+    .col {
+      padding:10px 0 !important;
+    }
+  }
+  .detail_list {
+    margin-top: 40px;
+    padding-bottom: 40px;
+    .row {
+      border-bottom: 1px solid $borderColor1;
+    }
+    .col {
+      font-size: 1.4rem;
+      padding:10px 0 5px 0!important;
+      color: $fontColor;
+    }
+  }
+  .exchange {
+    background-color:#f8f8f8 !important;
+    ion-card-content {
+      display: flex;
+      padding: 13px 10px;
+    }
+    .left {
+      width: 8rem;
+      img{
+        width: 8rem;
+        height: 8rem;
+      }
+      div {
+        font-size: 2.5rem;
+        color: $antColor;
+        text-align: center;
+        line-height: 80px;
+      }
+    }
+    .right {
+      flex: 1;
+      text-align: left;
+
+    }
+  }
+  .condition {
+    font-size: 1.5rem;
+    color: $antColor;
+  }
+  ion-card {
+    position: relative;
+  }
+  .useDisabled:after {
+    content: '失效';
+    width: 36px;
+    height: 36px;
+    color: white;
+    background-color: $antColor;
+    position: absolute;
+    right: 21px;
+    border-radius: 100%;
+    line-height: 35px;
+    text-align: center;
+    top: 50%;
+    margin-top: -18px;
+  }
+  .useDisabled h3, .useDisabled p, .useDisabled .left .values{
+    color: gainsboro;
+  }
+  .useDisabled img {
+    -webkit-filter: grayscale(90%);
+    -moz-filter: grayscale(90%);
+    -o-filter: grayscale(90%);
+    filter: grayscale(90%);
+  }
+}

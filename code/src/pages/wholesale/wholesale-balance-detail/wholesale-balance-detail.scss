@@ -1,0 +1,17 @@
+page-wholesale-balance-detail {
+  .row {
+    border-bottom: 1px solid $borderColor1;
+  }
+  .goldinfo {
+    .col {
+      padding:5px 0 !important;
+      color: $fontColor;
+      font-size: 1.3rem;
+    }
+  }
+  .goldHeader {
+    .col {
+      padding: 15px 0 !important;
+    }
+  }
+}

@@ -1,0 +1,126 @@
+page-mall-cart {
+  .is_del {
+    background: #f2f2f2;
+    font-size: 1.3rem;
+    padding: 0.8rem;
+    b {
+      color: $antColor;
+    }
+  }
+  .items {
+    border-bottom: 1px solid $borderColor;
+  }
+  dl{
+    display: flex;
+    padding: 10px;
+  }
+  dt{
+    width: 11rem;
+    img {
+      width: 8rem;
+      vertical-align: middle;
+      height: 8rem;
+      margin-left: 0.2rem;
+    }
+  }
+  dd{
+    flex: 1;
+    width: 0;
+    h3 {
+      font-size: 1.6rem;
+      margin: 0 0 0.2rem 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    p{
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: $fontColor;
+    }
+    .price {
+      color: $antColor;
+    }
+    .buy{
+      text-align: center;
+      width: 70px;
+      display: flex;
+      float: right;
+      button{
+        width:2rem;
+        height: 2rem;
+        font-size: 2rem;
+        background-color: $antColor;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        color: #fff;
+        font-weight: bold;
+        //line-height: 1.5rem;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+      }
+      .button-ios {
+        span{
+          padding-bottom: 5px;
+        }
+      }
+      .buy_left{
+        font-size: 2.4rem;
+      }
+      .buy_center{
+        flex: 1;
+      }
+      input{
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+  ion-footer{
+    .toolbar {
+      padding: 0;
+    }
+    ion-buttons {
+      margin: 0;
+      width: 40%;
+    }
+    .bar-button {
+      background-color: red;
+      color: white;
+      width: 100%;
+      height: 44px;
+    }
+    .bar-button-md {
+      height: 56px;
+      margin: 0;
+    }
+    i {
+      color: $antColor;
+      font-size: 1.6rem;
+    }
+    .allchecked {
+      margin: 0 !important;
+    }
+    .col {
+      padding: 13px 0 0 0;
+      font-size: 1.4rem;
+    }
+    .item-block {
+      background-color: transparent;
+      padding-left: 10px;
+    }
+    [col-5] {
+      padding: 0;
+      .item-inner {
+        border: 0 !important;
+        padding: 0 0 0 5px;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .checkbox-icon {
+    border: 1px solid $fontColor !important;
+  }
+}

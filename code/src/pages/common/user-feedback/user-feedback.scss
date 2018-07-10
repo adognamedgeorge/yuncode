@@ -1,0 +1,29 @@
+page-user-feedback {
+  .scroll-content {
+    padding: 10px !important;
+  }
+  textarea {
+    width: 100%;
+    resize: none;
+    padding: 10px;
+    background-color: $borderColor;
+    border: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+  }
+  .button[icon-only] {
+    width: 11rem;
+    height: 11rem;
+  }
+  ion-icon[name='tianjiatupian'] {
+    font-size: 8em;
+    color: $borderColor1;
+    padding: 0 !important;
+  }
+  .picture {
+    span {
+      color: $fontColor;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+page-minishop-open-shop {
+  .tophead {
+    padding: 30px 20px 10px 20px;
+  }
+  .col {
+    padding: 0;
+  }
+  .left {
+    height: 60px;
+    .imgLeft, p {
+      float: left;
+    }
+    img {
+      width: 60px;
+    }
+    p {
+      width: 120px;
+      color: $antColor;
+      margin: 5px 0 0 5px;
+    }
+  }
+  .right {
+    border-left: 1px solid $borderColor1;
+    height: 40px;
+    margin-top: 10px;
+    img {
+      width: 40px;
+    }
+  }
+  .foot {
+    margin-top: -10px;
+    padding: 0 10px;
+    a {
+      text-decoration: none;
+    }
+    .col, a {
+      color: #0083c8;
+    }
+  }
+  ion-label {
+    color: black !important;
+    font-size: 1.4rem;
+    width: 75px;
+  }
+  ion-footer {
+    .button {
+      margin: 0;
+    }
+  }
+  .ass {
+    color: $antColor;
+  }
+  .zz {
+    margin-top: 5px;
+    font-size: 1.3rem;
+    color: $fontColor;
+    text-align: center;
+  }
+}

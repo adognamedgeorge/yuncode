@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>推广商品</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <div class="order_title" [navPush]="'MallDetailPage'" [navParams]="{'id': item['itemId']}">
+        <p>{{item['title']}}</p>
+        <ion-icon name="jiantouyou" item-end></ion-icon>
+      </div>
+      <dl>
+        <dt>
+          <img [src]="appService.changeImgUrl(item['imageUrl'], 160)" [navPush]="'MallDetailPage'" [navParams]="{'id': item['itemId']}">
+        </dt>
+        <dd>
+          <div class="order_info">
+            <h3>商品售价：¥{{item.price | pricePipe}}</h3>
+            <span>推广佣金： <i>¥{{ ( item.point*item.price / 1000  ) | pricePipe}}</i></span>
+          </div>
+          <div class="order_status" (click)="marketing()">
+            <button ion-button outline>推广</button>
+          </div>
+        </dd>
+      </dl>
+      <!--<div text-right>-->
+        <!--<button ion-button small color="light">我要推广</button>-->
+      <!--</div>-->
+    </ion-item>
+  </ion-list>
+
+</ion-content>

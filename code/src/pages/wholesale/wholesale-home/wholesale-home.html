@@ -1,0 +1,156 @@
+<ion-header no-border class="homes">
+  <ion-navbar #header>
+    <ion-buttons left>
+      <button ion-button class="head_button" (click)="qrscanner()">
+        <ion-icon name="qr-scanner"></ion-icon>
+        <span class="sort_title1">扫一扫</span>
+      </button>
+    </ion-buttons>
+    <div start class="search_nav"  [navPush]="'WholesaleSearchPage'">
+      <ion-icon name="search"></ion-icon>
+      <input type="text" disabled placeholder="搜索" />
+    </div>
+    <ion-buttons end >
+      <button ion-button class="head_button"  [navPush]="'WholesaleCartPage'">
+        <ion-icon name="gouwu2"></ion-icon>
+        <i class="cart_num">{{cartInfo.count}}</i>
+        <span>购物车</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScroll)="scrollEvent($event)">
+  <ion-slides autoplay="3000" loop="true"  speed="2000" pager="true" *ngIf=" posterList['length'] >= 1 ">
+    <ion-slide *ngFor='let item of posterList' (tap)="goDetaile(item['link'])" >
+      <img [src]="appService.changeImgUrl(item['pic_url'], 600)" />
+    </ion-slide>
+  </ion-slides>
+  <ion-categories [categories]="categories"></ion-categories>
+  <ion-item class="use_info" no-border no-lines padding>
+    <div class="info_left">
+      <p>
+        <b [navPush]="'WholesaleBalanceDetailPage'">
+          余额：<span >{{yueManage['balance'] | pricePipe}}</span>
+        </b>
+      </p>
+      <p>
+        <b [navPush]="'WholesaleIntegralManagePage'">
+          积分：<span>{{yueManage['integral']}}</span>
+        </b>
+        &nbsp;&nbsp;
+        <b [navPush]="'WholesaleReceiveCouponPage'">
+          优惠券：<span>{{couponNum}}</span>
+        </b>
+      </p>
+    </div>
+    <div class="info_right">
+      <button *ngIf="!isCheckin" (tap)="checkin()">签到</button>
+      <button *ngIf="isCheckin"  disabled>已签到</button>
+    </div>
+  </ion-item>
+  <div class="announce" color="light">
+    <div>
+      <p>
+        批发
+        <span>快报</span>
+      </p>
+      <span class="itemsNew" [navPush]="'WholesaleNoticaInfoPage'" [navParams]="{'id': itemsNew.id}">
+       {{itemsNew.title}}
+      </span>
+    </div>
+  </div>
+  <!--<div class="publicity">-->
+    <!--<ion-row>-->
+      <!--<ion-col col-8 text-center tappable class="col">-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+      <!--<ion-col col-4 class="col">-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--<ion-row>-->
+      <!--<ion-col col-6>-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+      <!--<ion-col col-6>-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--<ion-row>-->
+      <!--<ion-col col-6>-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+      <!--<ion-col col-6>-->
+        <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</div>-->
+  <ion-item-divider class="t-header" color="light" text-center *ngIf="getKeys(presaleList)['length'] > 0">
+    <ion-icon name="rose" color="danger"></ion-icon>
+    预购活动
+  </ion-item-divider>
+  <div class="dl" *ngFor="let group of getKeys(presaleList)"  [navPush]="'WholesalePresaleModalPage'" [navParams]="{'presaleId':presaleList[group],'wholesaleUserInfo':wholesaleUserInfo}">
+    <div class="dt">
+      <img [src]="appService.changeImgUrl(presaleList[group]['pic_url'], 160)" />
+    </div>
+    <div class="dd">
+      <h3>{{presaleList[group]['title']}}</h3>
+      <p class="price" color="danger">
+        ￥{{presaleList[group]['total_fee'] | pricePipe}}
+      </p>
+    </div>
+  </div>
+  <ion-item-divider class="t-header" color="light" text-center *ngIf="specialProduct['length'] > 0">
+    <ion-icon name="flash" color="danger"></ion-icon>
+    限时特价
+  </ion-item-divider>
+    <div class="dl" *ngFor="let group of specialProduct">
+      <div class="dt" [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':group['product_list']['id']}">
+        <img [src]="appService.changeImgUrl(group['product_list']['pic_url'], 160)" />
+      </div>
+      <div class="dd">
+        <h3 [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':group['product_list']['id']}">{{group['product_list']['title']}}</h3>
+        <p class="price" color="danger">
+          ￥{{group['product_list']['sell_price'] | pricePipe}}
+        </p>
+        <p>
+          {{group['product_list']['spec']}}
+        </p>
+        <div class="buy">
+          <button (click)="addCart(group['product_list'])" *ngIf="group['product_list']['stock_info']['stock'] >= group['product_list']['min_sold_num'] || group['product_list']['stock_info']['warehouse_stock'] >= group['product_list']['min_sold_num']">
+            购买
+          </button>
+          <button class="nobuy" *ngIf="!(group['product_list']['stock_info']['stock'] >= group['product_list']['min_sold_num'] || group['product_list']['stock_info']['warehouse_stock'] >= group['product_list']['min_sold_num'])">
+            售罄
+          </button>
+        </div>
+      </div>
+    </div>
+  <ion-item-divider class="t-header" color="light" text-center *ngIf="recomProduct['length'] > 0">
+    <ion-icon name="heart" color="danger"></ion-icon>
+    推荐商品
+  </ion-item-divider>
+  <div class="dl" *ngFor="let group of recomProduct" >
+    <div class="dt"  [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':group['product_list']['id']}">
+      <img [src]="appService.changeImgUrl(group['product_list']['pic_url'], 160)" />
+    </div>
+    <div class="dd">
+      <h3  [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':group['product_list']['id']}">{{group['product_list']['title']}}</h3>
+      <p class="price" color="danger">
+        ￥{{group['product_list']['sell_price'] | pricePipe}}
+      </p>
+      <p>
+        {{group['product_list']['spec']}}
+      </p>
+      <div class="buy">
+        <button (click)="addCart(group['product_list'])" *ngIf="group['product_list']['stock_info']['stock'] >= group['product_list']['min_sold_num'] || group['product_list']['stock_info']['warehouse_stock'] >= group['product_list']['min_sold_num']">
+          购买
+        </button>
+        <button class="nobuy" *ngIf="!(group['product_list']['stock_info']['stock'] >= group['product_list']['min_sold_num'] || group['product_list']['stock_info']['warehouse_stock'] >= group['product_list']['min_sold_num'])">
+          售罄
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

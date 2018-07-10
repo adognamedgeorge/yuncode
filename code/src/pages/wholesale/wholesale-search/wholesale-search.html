@@ -1,0 +1,93 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header #header >
+  <ion-toolbar>
+    <ion-buttons left start>
+      <button ion-button class="arrowBack"   (click)="navCtrl.pop()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+      <form action="javascript:return true;">
+        <ion-searchbar placeholder="请输入要搜索的词" mode="ios" (ionInput)="getSearch($event)"></ion-searchbar>
+        <button (click)="goSearch()"></button>
+        <button ion-button small (click)='goSearch()' class="search">搜索</button>
+      </form>
+    <ion-buttons end >
+      <button ion-button  class="head_button" (click)="qrscanner()">
+        <ion-icon name="qr-scanner"></ion-icon>
+        <span>扫一扫</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="filtrate">
+    <ion-row text-center>
+      <ion-col col-4 (tap)="salesVolume()">
+        销量
+        <ion-icon name="arrow-up" *ngIf="salesVolumeStatus && !allSalesVolumeStatus"></ion-icon>
+        <ion-icon name="arrow-down" *ngIf="!salesVolumeStatus && !allSalesVolumeStatus"></ion-icon>
+        <span *ngIf="allSalesVolumeStatus">-</span>
+      </ion-col>
+      <ion-col col-4 (tap)="priceVolume()" >
+        价格
+        <ion-icon name="arrow-up" *ngIf="priceVolumeStatus  && !allPriceVolumeStatus"></ion-icon>
+        <ion-icon name="arrow-down" *ngIf="!priceVolumeStatus  && !allPriceVolumeStatus"></ion-icon>
+        <span *ngIf="allPriceVolumeStatus">-</span>
+      </ion-col>
+      <ion-col col-4 (tap)="openMenu()">
+        筛选
+        <ion-icon name="apps"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-header>
+<ion-content (ionScroll)="scrollEvent($event)" #scrollContent (ionScrollStart)="ionScrollStart($event)"  #mycontent >
+  <div *ngIf="!searchStatus" class="list_content">
+    <pifa-products [products]="products" [CategoriesStatus]="'WholesaleProductListPage'" [cartInfo]="cartInfo"></pifa-products>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="加载中...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <ion-row *ngIf="!loading">
+    <ion-col class="nodata" text-center>
+      没有商品啦 ♪(^∇^*)
+    </ion-col>
+  </ion-row>
+  <cart [comeFrom]="'whosesale'" [cartInfo]="cartInfo"></cart>
+</ion-content>
+<ion-menu [content]="mycontent" type="overlay" side="right" edge-drag-threshold="0" id="whosaleSearch">
+  <ion-scroll scrollY="true" class="whosaleSearchMenu searchMenuScroll">
+    <ion-item-divider class="t-header" color="light" *ngIf="fstCatList.length > 0">
+      类目
+    </ion-item-divider>
+    <ul >
+      <li *ngFor="let item of fstCatList;let i=index" [ngClass]="{'active': i == fstCatIndex}" (tap)="selectFstCat(i,item)">
+        {{item}}
+      </li>
+    </ul>
+    <ion-item-divider class="t-header" color="light" *ngIf="brandList.length > 0">
+      品牌
+    </ion-item-divider>
+    <ul>
+      <li *ngFor="let item of brandList;let i=index" [ngClass]="{'active': i == brandIndex}" (tap)="selectbrand(i,item)">
+        {{item}}
+      </li>
+    </ul>
+  </ion-scroll>
+  <ion-footer>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full color="light" (tap)="reset()"> 重置 </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full (tap)="choose()" > 确定 </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+</ion-menu>

@@ -1,0 +1,94 @@
+page-minishop-home {
+  ion-slides {
+    height: 130px;
+    img{
+      width: 100% !important;
+    }
+  }
+  ion-icon[name=jiantouxia] {
+    vertical-align: middle;
+    font-size: 1.2rem;
+    margin-left: -4px;
+  }
+  ion-icon[name=dingwei] {
+    margin-right: -4px;
+  }
+  .openShop{
+    padding: 0 15px 5px;
+    border-bottom: 5px solid $borderColor;
+    //margin-top: 60px;
+  }
+  .t-header {
+    border: none;
+    position: relative;
+    font-size: 1.5rem;
+    padding-left: 20px;
+    ion-label {
+      margin: 8px 8px 8px 0;
+    }
+    ion-icon {
+      vertical-align: text-bottom;
+    }
+  }
+  form{
+    height: 60px;
+    z-index: 999;
+    position: absolute;
+    //position: fixed;
+    //top: 187px;
+    width: 100%;
+    ion-searchbar {
+    }
+  }
+  .shop_list {
+    margin-top: 60px;
+  }
+  .delivery_info {
+    margin-top: 6px;
+  }
+  .activity {
+    color: $antColor;
+  }
+  .cart_list {
+    display: flex;
+    padding: 16px 8px 13px;
+    border-bottom: 1px solid $borderColor;
+    dt{
+      width: 8rem;
+      margin-right: 5px;
+      img{
+        width: 100%;
+        height: 8rem;
+      }
+    }
+    dd{
+      flex: 1;
+      font-size: 1.2rem;
+      font-weight: 400;
+      padding: 5px;
+      h2{
+        margin:0 0 5px 0;
+        font-size: 1.4rem;
+      }
+      b{
+        color: $antColor;
+      }
+      .level{
+        display: inline-block;
+      }
+      .serviceScore {
+        padding-right: 10px;
+      }
+      .star-level{
+        width: 78px;
+        height: 12px;
+        display: inline-block;
+        background: url("../assets/imgs/star.png")  no-repeat  0 0 / 76px auto;
+        .highlight-star{
+          @extend .star-level;
+          background-position:0 -12px;
+        }
+      }
+    }
+  }
+}

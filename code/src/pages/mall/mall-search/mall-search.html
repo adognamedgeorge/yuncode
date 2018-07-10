@@ -1,0 +1,50 @@
+
+<ion-header #header >
+  <ion-toolbar>
+      <ion-buttons left start>
+        <button ion-button class="arrowBack"   (click)="navCtrl.pop()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <form action="javascript:return true;">
+        <ion-searchbar placeholder="请输入要搜索的词" mode="ios" (ionInput)="getSearch($event)"></ion-searchbar>
+        <button (click)="goSearch()"></button>
+      </form>
+    <ion-buttons end >
+      <button ion-button class="head_button" (click)="openMenu()">
+        <ion-icon name="sort1"></ion-icon>
+        <span>分类</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <cart [comeFrom]="'mall'" [cartNum]="cartNum"></cart>
+</ion-header>
+<ion-content (ionScroll)="scrollEvent($event)" #scrollContent (ionScrollStart)="ionScrollStart($event)"  #mycontent >
+  <div class="list_content">
+    <mall-products [products]="products" [mallHome]="true"></mall-products>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="加载中...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <ion-row *ngIf="!loading">
+    <ion-col class="nodata" text-center>
+      没有商品啦 ♪(^∇^*)
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-menu type="overlay" side="left" edge-drag-threshold="0"  [content]="mycontent" class="mallHomeMenu" id="mallSearch">
+    <ion-scroll scrollY="true" class="searchMenuScroll">
+      <ion-list no-line>
+        <!--<button ion-item *ngFor="let item of pIdList" (click)="itemSelected(item)">-->
+        <!--{{item['system_name']}}-->
+        <!--</button>-->
+        <ion-item *ngFor="let item of pIdList" (tap)="goCategorySearch(item['category_id'])">
+          {{item['system_name']}}
+          <ion-icon name="jiantouyou" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+</ion-menu>

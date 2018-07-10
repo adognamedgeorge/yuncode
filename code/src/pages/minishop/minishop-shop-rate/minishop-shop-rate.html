@@ -1,0 +1,36 @@
+  <ion-scroll scrollY="true" #scroll>
+    <ion-list>
+      <ion-item *ngFor="let item of ShopRate">
+        <ion-row>
+          <ion-col col-5>
+            <div class="star-level">
+              <p class="highlight-star" [ngStyle]="{'width': item['service_score'] * 10 + '%'}"></p>
+            </div>
+          </ion-col>
+          <ion-col text-right>
+            {{item['updated_at']}}
+          </ion-col>
+        </ion-row>
+        <p *ngIf="item['content']">
+          {{item['content']}}
+        </p>
+        <p *ngIf="!item['content']">
+          用户暂时没有评价
+        </p>
+        <p *ngIf="item['reply']">
+          卖家回复：{{item['reply']}}
+        </p>
+      </ion-item>
+    </ion-list>
+    <ion-row *ngIf="!loading">
+      <ion-col text-center padding>
+        没有评价啦 ♪(^∇^*)
+      </ion-col>
+    </ion-row>
+    <ion-row #spinner  *ngIf="loading">
+      <ion-col text-center>
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+

@@ -1,0 +1,41 @@
+<ion-header>
+  <div class="headerInfo">
+    <ion-navbar>
+      <ion-title>已选商品</ion-title>
+      <ion-buttons left>
+        <button ion-button class="del" (click)="clean()">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+          清空
+        </button>
+      </ion-buttons>
+      <ion-buttons right>
+        <button ion-button icon-only (click)="close()">
+          <ion-icon name="close-circle"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-list class="info" no-lines no-border>
+    <ion-item *ngFor="let item of getKeys(shopCart)">
+      <ion-row>
+        <ion-col col-6 class="title">
+          {{shopCart[item]['itemName']}}
+        </ion-col>
+        <ion-col >
+          <span class="price">
+            ¥{{shopCart[item]['sellPrice'] * shopCart[item]['inCartQuantity'] | pricePipe}}
+          </span>
+          <div class="buy">
+            <button ion-button  color="light" class="buy_left" (click)="minusProduct(shopCart[item])" >-</button>
+            <div class="buy_center">
+              <input type="text" readonly [(ngModel)]="shopCart[item]['inCartQuantity']">
+            </div>
+            <button ion-button (click)="addProduct(shopCart[item])" >+</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

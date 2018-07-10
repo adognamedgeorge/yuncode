@@ -1,0 +1,56 @@
+<ion-header no-border class="homes">
+  <ion-navbar #header>
+    <ion-buttons end >
+      <button ion-button class="head_button"  [navPush]="'MallCartPage'">
+        <ion-icon name="gouwu2"></ion-icon>
+        <i class="cart_num">{{cartNum}}</i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen #content>
+  <ion-slides #ionSlides  loop="true" speed="2000" pager="true" autoplay="3000" *ngIf=" imageList.length >= 1 " >
+    <ion-slide *ngFor='let item of imageList'>
+      <img [src]="appService.changeImgUrl(item, 700)">
+    </ion-slide>
+  </ion-slides>
+  <dl>
+    <dt>
+      <h4>{{itemList.title}}</h4>
+      <p>{{itemList.subTitle}}</p>
+      <p class="price">
+        <span><b>¥ </b>{{itemList.sellPrice | pricePipe}}</span>
+      </p>
+      <p>快递费: 订单不满2元,收运费5元</p>
+      <p>客服热线: <span class="telNum">0571-86908200</span></p>
+    </dt>
+  </dl>
+  <div [innerHTML]="itemList['content']" padding></div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <!--<ion-row>-->
+      <!--<ion-col  col-4 class="share" (tap)="share(itemList)">-->
+        <!--<ion-icon  name="share" color="dark"></ion-icon>-->
+        <!--<span class="title_foot">分享</span>-->
+      <!--</ion-col>-->
+      <!--<ion-col col-4>-->
+        <!--<button ion-button color="golden" (click)="addCart('addCart')">加入购物车</button>-->
+      <!--</ion-col>-->
+      <!--<ion-col col-4>-->
+        <!--<button ion-button color="danger"  (click)="addCart('nowBuy')">立即购买</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+    <div (tap)="share(itemList)">
+      <ion-icon  name="share" color="dark"></ion-icon>
+      <span class="title_foot">分享</span>
+    </div>
+    <ion-buttons end>
+      <button ion-button class="gold" (click)="addCart('addCart')">加入购物车</button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button class="red" (click)="addCart('nowBuy')">立即购买</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+<div class="backdrop" *ngIf="isBackdrop"></div>

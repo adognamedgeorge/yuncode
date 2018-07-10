@@ -1,0 +1,8 @@
+<div class="categories">
+  <ion-row>
+    <ion-col text-center tappable col-3 *ngFor="let c of categories" (click)="go(c.go, c.id)">
+      <i class="cssSprite {{c.class}} icon"></i>
+      <span class="title">{{c.title}}</span>
+    </ion-col>
+  </ion-row>
+</div>

@@ -1,0 +1,55 @@
+<!--
+  Generated template for the WholesalePresaleModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{items['title']}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list class="card">
+    <ion-item class="presaleItemHead">
+      <p>
+        {{items['use_begin_time']}} — {{items['use_end_time']}}
+      </p>
+    </ion-item>
+    <ion-item class="presaleItem">
+      <div class="container" *ngFor="let item of item">
+        <p>{{item['product_title']}}</p>
+        <p class="itemInfo">
+          <span >规格 : {{item['spec']}}/{{item['product_unit']}}</span>
+          <span>数量 : {{item['amount']}}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-list class="card"  radio-group  [(ngModel)]="payType">
+    <ion-item>
+      <ion-label>支付宝支付</ion-label>
+      <ion-radio value="alipay"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>余额支付</ion-label>
+      <ion-radio value="yue"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-list class="card" no-lines>
+    <ion-item>
+      <ion-row>
+        <ion-col col-4>
+          <span class="total">总价(元):<strong> {{items['total_fee'] * num | pricePipe}} </strong></span>
+        </ion-col>
+        <ion-col text-right>
+          <button  class="plus mius" (tap) = "minus()">-</button>
+          <input  class="num" type="tel" readonly [(ngModel)]="num" value={{num}} >
+          <button  class="plus add" (tap) = "add()">+</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <button ion-button color="danger" margin-top full (tap)="getKeys(items['items'])" (tap)="createOrder()">购买</button>
+
+</ion-content>

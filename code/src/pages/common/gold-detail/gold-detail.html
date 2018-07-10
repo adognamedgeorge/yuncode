@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>蚂蚁金币</ion-title>
+  </ion-navbar>
+  <ion-row text-center class="goldHeader">
+    <ion-col col-3>交易时间</ion-col>
+    <ion-col col-3>交易状态</ion-col>
+    <ion-col col-3>交易金额</ion-col>
+    <ion-col col-3>交易类型</ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <ion-row text-center class="goldinfo" *ngFor="let item of items">
+    <ion-col col-3>{{item.createTime}}</ion-col>
+    <ion-col col-3 *ngIf="item['inOut'] ==1">收入</ion-col>
+    <ion-col col-3 *ngIf="item['inOut'] ==2">支出</ion-col>
+    <ion-col col-3>{{item['realAmount'] | pricePipe}}</ion-col>
+    <ion-col col-3>{{item['type']}}</ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,99 @@
+page-minishop-shop {
+  .backdrop {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    bottom: 0;
+    z-index: 99;
+  }
+  .haveFooter .scroll-content{
+   margin-bottom: 0!important;
+  }
+  .switch, .switchChild{
+    height: 100%;
+  }
+  //ion-slides {
+  //  height: 100% !important;
+  //}
+  //.swiper-slide{
+  //  -webkit-box-align: normal !important;
+  //  -webkit-align-items: normal !important;
+  //  -ms-flex-align: normal !important;
+  //  align-items: normal !important;
+  //
+  //  .slide-zoom{
+  //    overflow-y: auto;
+  //  }
+  //}
+  .toolbarheader .toolbar-background {
+    background-color: white;
+  }
+  .star-level{
+    width: 80px;
+    height: 12px;
+    margin: 6px auto;
+    background: url("../../../assets/imgs/star.png")  no-repeat  0 0 / 76px auto;
+    .highlight-star{
+      background: url("../../../assets/imgs/star.png")  no-repeat  0 0 / 76px auto;
+      height: 12px;
+      background-position:0 -12px;
+      width: 20px;
+    }
+  }
+  ion-footer {
+    background-color: white;
+    &:before {
+      background: 0 !important;
+    }
+    .price {
+      color: black;
+      font-size: 1.4rem;
+    }
+    .col {
+      padding: 0;
+    }
+    .confirm {
+      width: 0;
+    }
+    [ion-button] {
+      margin: 0 !important;
+    }
+    .cart {
+      ion-icon, span {
+        position: absolute;
+        border-radius: 100%;
+        text-align: center;
+      }
+      div {
+        position: absolute;
+        font-size: 1.2rem;
+        left: 63px;
+        color: $fontColor;
+        top: 2px;
+      }
+      ion-icon {
+        font-size: 3rem;
+        top: -20px;
+        left: 10px;
+        color: gold;
+        background-color: white;
+        width: 45px;
+        height: 45px;
+        font-weight: bold;
+        line-height: 50px;
+      }
+      span {
+        background-color: $antColor;
+        top: -15px;
+        left: 40px;
+        width: 17px;
+        height: 17px;
+        color: white;
+        line-height: 17px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

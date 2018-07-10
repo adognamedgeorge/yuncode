@@ -1,0 +1,29 @@
+page-wholesale-balance-convert {
+  .scroll-content {
+    padding:0 16px 16px!important;
+  }
+  .item-block {
+    padding-left: 0;
+    margin-bottom: 5px;
+  }
+
+  .explain {
+    h2 {
+      font-size: 1.6rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+    }
+    p {
+      color: $fontColor;
+    }
+  }
+  p[text-right]{
+    color: $antColor;
+    margin:0 0 6px;
+  }
+  .ass {
+    color: $antColor;
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,15 @@
+<!--
+  Generated template for the AlwaysBuyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>我常购买</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <pifa-products [products]="products" [cartInfo]="cartInfo" [CategoriesStatus]="'WholesaleProductListPage'"></pifa-products>
+  <cart [comeFrom]="'whosesale'" [cartInfo]="cartInfo"></cart>
+</ion-content>

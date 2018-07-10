@@ -1,0 +1,7 @@
+<ion-fab right bottom>
+  <button ion-fab color="light" (click)="showCart(comeFrom)">
+    <ion-icon name="gouwu2"></ion-icon>
+    <i class="cart_num" *ngIf="comeFrom == 'mall'">{{cartNum}}</i>
+    <i class="cart_num" *ngIf="comeFrom == 'whosesale'">{{cartInfo.count}}</i>
+  </button>
+</ion-fab>

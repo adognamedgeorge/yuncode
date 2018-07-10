@@ -1,0 +1,23 @@
+page-mall-order {
+  ion-header {
+    ion-row {
+      border-bottom: 1px solid $borderColor1;
+    }
+  }
+  ion-slides {
+    height: 100% !important;
+  }
+  .swiper-slide{
+    -webkit-box-align: normal !important;
+    -webkit-align-items: normal !important;
+    -ms-flex-align: normal !important;
+    align-items: normal !important;
+
+    .slide-zoom{
+      overflow-y: auto;
+    }
+  }
+  .toolbarheader .toolbar-background {
+    background-color: white;
+  }
+}

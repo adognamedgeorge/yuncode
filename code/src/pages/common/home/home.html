@@ -1,0 +1,184 @@
+<!--<ion-header no-border>-->
+  <!--<ion-navbar #header>-->
+    <!--<ion-buttons left>-->
+      <!--<button ion-button class="head_button" (click)="goDetails()">-->
+        <!--<ion-icon name="qr-scanner" color="light"></ion-icon>-->
+        <!--<span>扫一扫</span>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+    <!--<div start class="search_nav" [navPush]="'WholesaleSearchPage'">-->
+      <!--<ion-icon name="search"></ion-icon>-->
+      <!--<input type="text"  disabled />-->
+      <!--<span>搜索</span>-->
+    <!--</div>-->
+    <!--<ion-buttons end>-->
+      <!--<button ion-button class="head_button">-->
+        <!--<ion-icon name="qr-scanner" name="card"></ion-icon>-->
+        <!--<span>会员码</span>-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  <!--</ion-navbar>-->
+<!--</ion-header>-->
+<ion-content #content fullscreen>
+<!--<ion-content #content fullscreen (ionScroll)="scrollEvent($event)">-->
+  <ion-slides autoplay="3000" loop="true"  speed="2000" pager="true">
+    <ion-slide *ngFor='let item of slides' (tap)="goDetaile()" >
+      <img src="{{item}}">
+    </ion-slide>
+  </ion-slides>
+  <!--<div class="categories">-->
+    <!--<ion-row >-->
+      <!--<ion-col text-center tappable col-3 *ngFor="let c of categories">-->
+        <!--<i class="cssSprite {{c.class}} icon"></i>-->
+        <!--<span class="title">{{c.title}}</s pan>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</div>-->
+  <ion-categories [categories]="categories" [isLoad]="isLogin" [isWholesaleUser]="isWholesaleUser"></ion-categories>
+  <ion-item-divider class="t-header" color="light" [goTabs]="{type:'MinishopHomePage', isWhosaleUser:isWholesaleUser, isLoad: isLogin}">
+    <div class="left">
+      <i class="cssSprite"></i>
+      蚂蚁小店
+      <span> | 附近有{{nearShop.total? nearShop.total: 0}}家小店</span>
+    </div>
+    <p>{{addressLocation? addressLocation: "定位中..."}}</p>
+  </ion-item-divider>
+  <div class="openShop" *ngIf="haveShop">
+    <p>
+      1500米内没有店铺
+    </p>
+    <button ion-button color="danger" small [navPush]="'MinishopOpenShopPage'">我要开店</button>
+  </div>
+  <dl class="cart_list" *ngIf="!haveShop">
+    <dt  [navPush]="'MinishopShopPage'" [navParams]="{'shopId':nearShop.id}">
+      <i  *ngIf="!nearShop.logo_url"></i>
+      <img  *ngIf="nearShop.logo_url" src="{{nearShop.logo_url}}" alt="加载中...">
+    </dt>
+    <dd>
+      <div class="shop_info" [navPush]="'MinishopShopPage'" [navParams]="{'shopId':nearShop.id}">
+        <h2>{{nearShop.title}}</h2>
+        <div class="star-level" *ngIf="nearShop.rate_count > 0">
+          <span class="highlight-star" [ngStyle]="{'width': nearShop.service_score * 10 + '%'}"></span>
+        </div>
+        <div class="level" *ngIf="nearShop.rate_count == 0">暂未收到评价</div>
+        <b class="serviceScore" *ngIf="nearShop['rate_count'] > 0">{{(nearShop['service_score'] / 2).toFixed(2)}}</b>
+        <b class="coupon-tip" *ngIf="nearShop['max_return_cash'] > 0">券</b>
+        <div class="delivery_info">
+          <span>
+            <b>{{nearShop.minimum_amount | pricePipe}}</b>
+            元起送 ㅣ
+          </span>
+          <span>
+            配送费
+            <b>{{nearShop.delivery_fee |pricePipe}}</b>
+            元
+          </span>
+        </div>
+        <div>
+          距您
+          <b color="primary">{{nearShop.distance}}</b>
+          <span *ngIf="thousandShow">千</span>
+          米
+        </div>
+      </div>
+      <!--<div class="open_shop">-->
+        <!--<i class="cssSprite"></i>-->
+      <!--</div>-->
+    </dd>
+  </dl>
+  <ion-item-divider class="t-header" color="light" [goTabs]="{type:'WholesaleHomePage', isWhosaleUser:isWholesaleUser, isLoad: isLogin}">
+    <div class="left">
+      <i class="cssSprite"></i>
+      蚂蚁批发
+      <span> | 百万家便利店的选择 </span>
+    </div>
+    <p>
+      更多 &gt;
+    </p>
+  </ion-item-divider>
+  <div>
+    <div class="announce" color="light" *ngIf="isWholesaleUser">
+      <div>
+        <p [navPush]="'WholesaleNewsPage'">
+          批发
+          <span>快报</span>
+        </p>
+        <span class="itemsNew" [navPush]="'WholesaleNoticaInfoPage'" [navParams]="{'id': itemsNew['id']}">{{itemsNew['title']}}</span>
+      </div>
+    </div>
+    <!--<div class="publicity">-->
+      <!--<ion-row>-->
+        <!--<ion-col col-8 text-center tappable class="col">-->
+          <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+        <!--</ion-col>-->
+        <!--<ion-col col-4 class="col">-->
+          <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+          <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row>-->
+        <!--<ion-col col-6>-->
+          <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+        <!--</ion-col>-->
+        <!--<ion-col col-6>-->
+          <!--<img src="http://i1.yunmayi.com/upload/2017/12/30/69241512533dd166cd996c38bc8988e7.jpg">-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+    <!--</div>-->
+  </div>
+  <pifa-products [products]="WholesaleCategories" [priceShow]="isWholesaleUser"></pifa-products>
+  <ion-item-divider class="t-header" color="light" [goTabs]="{type:'MallHomePage', isWhosaleUser:isWholesaleUser, isLoad: isLogin}">
+    <div class="left">
+      <i class="cssSprite"></i>
+      零售商城111
+      <span> | 家门口的网上商城</span>
+    </div>
+    <p>
+      更多 &gt;
+    </p>
+  </ion-item-divider>
+  <div class="publicity">
+    <ion-row *ngIf="MallAdvertising0" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising0['itemId']}">
+      <ion-col col-6 text-center tappable class="col">
+        <img  src="{{MallAdvertising0['image']}}">
+      </ion-col>
+      <ion-col col-6 class="col">
+        <ion-row *ngIf="MallAdvertising1" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising1['itemId']}">
+          <img src="{{MallAdvertising1['image']}}">
+        </ion-row>
+        <ion-row  *ngIf="MallAdvertising2" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising2['itemId']}">
+          <img src="{{MallAdvertising2['image']}}">
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="MallAdvertising3" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising3['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising3['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising4" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising4['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising4['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising5" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising5['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising5['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="MallAdvertising6" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising6['itemId']}">
+      <ion-col>
+        <img src="{{MallAdvertising6['image']}}">
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="MallAdvertising7" [navPush]="'MallDetailPage'" [navParams]="{'id': MallAdvertising7['itemId']}">
+      <ion-col>
+        <img  src="{{MallAdvertising7['image']}}">
+      </ion-col>
+    </ion-row>
+  </div>
+  <p text-center class="timeBuy" *ngIf="mallItems.length > 0">
+    限 ／ 时 ／ 特 ／惠
+  </p>
+  <mall-products [products]="mallItems"></mall-products>
+</ion-content>

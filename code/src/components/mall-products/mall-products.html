@@ -1,0 +1,21 @@
+<!-- Generated template for the IonProductsComponent component -->
+<div class="product">
+  <ion-row wrap>
+    <ion-col tappable col-6 *ngFor="let p of products; let i = index"  [navPush]="'MallDetailPage'" [navParams]="{'id': p['id']}">
+      <div class="pic1" *ngIf="!mallHome">
+        <img [src]="appService.changeImgUrl(p.imageUrl, 300)">
+      </div>
+      <div class="pic1" *ngIf="mallHome">
+        <img [src]="appService.changeImgUrl(p.imageUrl, 300)">
+      </div>
+      <p class="titles">{{p.title}}</p>
+      <div class="list-price">
+        <div>
+          <span class="price-new"><i>￥</i>{{p.sellPrice | pricePipe}}</span>
+          <i class="del">￥<span>{{p.marketPrice | pricePipe}}</span></i>
+        </div>
+        <!--<a class="buy cssSprite" (click)="addCart($event,i)"></a>-->
+      </div>
+    </ion-col>
+  </ion-row>
+</div>

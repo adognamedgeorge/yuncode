@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ReceiveAdressPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button clear (click)="modalClose()">取消</button>
+    </ion-buttons>
+    <ion-title>收货地址</ion-title>
+    <ion-buttons end>
+      <button ion-button clear  (click)="addAdress()">新增地址</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-item-divider class="t-header" color="light">
+    定位当前地址
+  </ion-item-divider>
+  <ion-item no-lines (tap)="locationHere()">
+    {{addressLocation ? addressLocation: "定位中失败,请手动定位"}}
+    <ion-icon name="dingwei2" item-end color="danger"></ion-icon>
+  </ion-item>
+  <ion-item-divider class="t-header" color="light">
+    收货地址
+  </ion-item-divider>
+  <ion-list  no-lines>
+    <ion-item-sliding *ngFor="let item of addressList" >
+      <ion-item (tap)="selectAddress(item)">
+        <p>
+          {{item['district_name']}}&nbsp;{{item['address']}}
+        </p>
+        <p class="call_info">
+          {{item['name']}}&nbsp;&nbsp;{{item['mobile']}}
+        </p>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="light" (click)="edit(item)">编辑</button>
+        <button ion-button color="danger" (click)="removeItem(item)">删除</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-title>小店订单</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        全部
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        待付款
+      </ion-segment-button>
+      <ion-segment-button value="s2" (ionSelect)="goToSlide(2)">
+        待收货
+      </ion-segment-button>
+      <ion-segment-button value="s3" (ionSelect)="goToSlide(3)">
+        已完成
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="'s0'">
+      <order-list-model [orderType]="orderType[0]" [products]="items" (childEvent)="getChildEvent($event)"></order-list-model>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngSwitchCase="'s1'">
+      <order-list-model [orderType]="orderType[1]" [products]="items" (childEvent)="getChildEvent($event)"></order-list-model>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngSwitchCase="'s2'">
+      <order-list-model [orderType]="orderType[2]" [products]="items" (childEvent)="getChildEvent($event)"></order-list-model>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngSwitchCase="'s3'">
+      <order-list-model [orderType]="orderType[3]" [products]="items" (childEvent)="getChildEvent($event)"></order-list-model>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+  <!---->
+  <!--<ion-slides centeredSlides="false" zoom="false" (ionSlideWillChange)="onSlideWillChange()">-->
+    <!--<ion-slide>-->
+      <!--<order-list-model [orderType]="orderType[0]" [products]='itemsOne'></order-list-model>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<order-list-model [orderType]="orderType[1]" [products]='itemsTwo'></order-list-model>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<order-list-model [orderType]="orderType[2]" [products]='itemsThird'></order-list-model>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<order-list-model [orderType]="orderType[3]" [products]='itemsThour'></order-list-model>-->
+    <!--</ion-slide>-->
+  <!--</ion-slides>-->
+</ion-content>

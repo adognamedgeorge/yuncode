@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>意见反馈</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="path" (tap)="open()">
+    <img [src]="path">
+  </div>
+  <div class='picture' *ngIf="!path">
+    <button ion-button icon-only clear (click)="open()">
+      <ion-icon name="tianjiatupian" ></ion-icon>
+    </button>
+    <span>请上传相关照片</span>
+  </div>
+  <textarea placeholder="备注" cols="30" rows="10" [(ngModel)]="content"></textarea>
+  <div ion-item>
+    <ion-input type="tel" placeholder="联系方式" [(ngModel)]="mobile"></ion-input>
+  </div>
+  <button ion-button full margin-top (click)="confirm()">提交</button>
+</ion-content>

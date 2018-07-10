@@ -1,0 +1,77 @@
+page-wholesale-receive-coupon {
+  ion-header {
+    ion-row {
+      border-bottom: 1px solid $borderColor1;
+    }
+    .bar-button{
+      color: $fontColor !important;
+      .cart_num{
+        color: #fff;
+        line-height: 1.3rem;
+      }
+    }
+  }
+  .toolbarheader .toolbar-background {
+    background-color: white;
+  }
+
+  ion-card-content {
+    background-color: #32db64;
+    padding: 0 !important;
+    display: flex;
+    .mycoupon_left {
+      flex: 1;
+      background-color: white;
+      margin-left: 3px;
+      .time {
+        margin-top: 1.5rem;
+        padding-left: 10px;
+      }
+      .info {
+        display: flex;
+        .info_left{
+          flex: 1;
+          font-size: 3.6rem;
+          font-weight: bold;
+          white-space: nowrap;
+          -ms-text-overflow: ellipsis;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-align: center;
+          word-spacing: -5px;
+          span {
+            font-size: 1.8rem;
+            color: $antColor;
+            vertical-align: super;
+          }
+        }
+        .info_right {
+          width: 12rem;
+          padding-top: 8px;
+        }
+      }
+    }
+    .mycoupon_right {
+      border-left: 4px dotted white;
+      padding: 8px;
+      width: 8rem;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  .use {
+    background-color: $antColor;
+  }
+  .noUse {
+    background-color: gainsboro;
+    color: gainsboro;
+    span {
+      color: gainsboro!important;
+    }
+    p {
+      color: gainsboro;
+    }
+  }
+}

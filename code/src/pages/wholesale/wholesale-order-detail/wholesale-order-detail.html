@@ -1,0 +1,105 @@
+<!--
+  Generated template for the WholesaleOrderDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>订单详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item class="dl">
+      <p>订单编号 : <span>{{itemId}}</span></p>
+      <p>买&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 家 : <span> {{info.buyer_name}}</span></p>
+      <p>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 址 : <span> {{info.buyer_prov_name}}&nbsp;&nbsp;{{info.buyer_city_name}}&nbsp;&nbsp;{{info.buyer_area_name}}&nbsp;&nbsp;{{info.buyer_address}}</span></p>
+      <p>时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 间 : <span> {{info.create_datetime}}</span></p>
+      <p>订单状态 :
+        <span *ngIf=" info.state == 1"> 待收货</span>
+        <span *ngIf=" info.state == 2">待收货</span>
+        <span *ngIf=" info.state == 3">交易已完成</span>
+        <span *ngIf=" info.state == 4">申请取消</span>
+        <span *ngIf=" info.state == 5">取消成功</span>
+      </p>
+      <p *ngIf="info.deliveryman_name">配送司机: <span>{{info.deliveryman_name}}</span></p>
+      <p *ngIf="info.deliveryman_mobile">联系方式: <span>{{info.deliveryman_mobile}}</span></p>
+      <p *ngIf="info.scan_datetime">发货时间: <span>{{info.scan_datetime}}</span></p>
+    </ion-item>
+    <ion-item class="dl" *ngFor="let item of items" >
+      <div class="contents">
+        <div class="dt" [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId': item.product_id}">
+          <img [src]="appService.changeImgUrl(item.product_image, 160)" />
+        </div>
+        <div class="dd">
+          <h3 [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId': item.product_id}">{{item.product_title}}</h3>
+          <p class="price">
+            ¥{{item.product_sell_price | pricePipe }}  x {{item.quantity}}{{item.product_unit}}
+          </p>
+          <p class="price allPrice">
+            <span>
+              实付：¥{{item.pay_total_sell_price | pricePipe}}
+            </span>
+          </p>
+          <p class="buy">
+            <button ion-button (tap)="returngoods(item)">退货</button>
+          </p>
+        </div>
+      </div>
+    </ion-item>
+    <ion-item class="dl">
+      <ion-row>
+        <ion-col col-4>
+          支付方式
+        </ion-col>
+        <ion-col text-right>
+          <span *ngIf="info['pay_type'] == 1">货到付款</span>
+          <span *ngIf="info['pay_type'] == 2">余额支付</span>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="info['buyer_remark'] !=''">
+        <ion-col col-4>
+          备注
+        </ion-col>
+        <ion-col text-right>
+          {{info.buyer_remark}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          订单总金额
+        </ion-col>
+        <ion-col text-right>
+          {{info.origin_total_sell_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <div *ngFor="let coupon of coupons">
+        <ion-row  *ngIf="coupon['discount_fee'] != 0">
+          <ion-col col-4>
+            {{coupon.promotion_name}}
+          </ion-col>
+          <ion-col text-right>
+            - ¥{{coupon.discount_fee | pricePipe}}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row *ngIf="info['cat_discount_price'] !=0">
+        <ion-col col-4>
+          折扣
+        </ion-col>
+        <ion-col text-right>
+            - ¥{{info.cat_discount_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4  class="allPrice">
+          实付
+        </ion-col>
+        <ion-col text-right class="allPrice">
+          ¥{{info.pay_total_sell_price | pricePipe}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

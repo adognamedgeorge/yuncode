@@ -1,0 +1,24 @@
+page-wholesale-always-buy {
+  .protitle{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    word-break:break-all;
+    white-space:nowrap;
+  }
+  .price{
+    position:relative;
+    color:#e62d2d;
+  }
+  .cart{
+    width:25px;
+    height:25px;
+    position:absolute;
+    right:5px;
+  }
+  .col:nth-child(n){
+    border-right:1px solid #ccc;
+  }
+  .col:nth-child(n+2){
+    border-top:1px solid #ccc;
+  }
+}

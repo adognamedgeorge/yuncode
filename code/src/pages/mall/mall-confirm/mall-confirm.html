@@ -1,0 +1,73 @@
+<!--
+  Generated template for the MallConfirmPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>商城订单确认</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content (tap)="openAdreesModal()">
+      <ion-icon name="dingwei" color="danger"></ion-icon>
+      <div *ngIf="!addressId" margin-top>
+        <p >请选择地址</p>
+      </div>
+      <div *ngIf="addressId">
+        <p>{{addressInfo['name']}}</p>
+        <p>{{addressInfo.prov_name}}&nbsp;&nbsp;{{addressInfo.city_name}}&nbsp;&nbsp;{{addressInfo.district_name}}&nbsp;&nbsp;{{addressInfo.address}}</p>
+      </div>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+  <ion-list class="sss">
+    <ion-item-divider color="light">商品列表</ion-item-divider>
+    <ion-item  *ngFor="let item of products">
+      <dl>
+        <dt>
+          <img [src]="appService.changeImgUrl(item['imageUrl'], 160)" [navPush]="'MallDetailPage'" [navParams]="{'id': item['itemId']}">
+        </dt>
+        <dd>
+          <h2>{{item['title']}}</h2>
+          <p>{{item['propsMeassage']}}</p>
+          <p color="danger">
+            ¥{{item['sellPrice'] | pricePipe}}
+            <span>X{{item.num}}</span>
+          </p>
+        </dd>
+      </dl>
+    </ion-item>
+    <ion-item-divider color="light">温馨提示</ion-item-divider>
+    <ion-item>商品都是产地直发，会被拆成多个快件，陆续发货</ion-item>
+    <ion-item-divider color="light">备注</ion-item-divider>
+    <ion-item><input type="text" placeholder="如有需求，请备注" [(ngModel)]="keyWord"></ion-item>
+    <ion-item-divider color="light">结算明细</ion-item-divider>
+    <ion-item class="price">
+      商品总金额
+      <span>¥{{priceAll | pricePipe}}</span>
+    </ion-item>
+    <ion-item class="price" *ngIf="postage > 0">
+      邮费
+      <span>¥{{postage | pricePipe}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>可用{{goldCash}}蚂蚁金币抵用{{goldCash | pricePipe}}元</ion-label>
+      <ion-toggle [(ngModel)]="isGoldCash" (ionChange)="imputedPrice()"  [disabled]="goldCash == 0"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>可用{{wholesalePoints}}积分抵用{{wholesalePoints/10 | pricePipe}}元</ion-label>
+      <ion-toggle [(ngModel)]="iswholesalePoints" (ionChange)="imputedPrice()"  [disabled]="wholesalePoints == 0"> </ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <span>应付: <i>¥{{costsPrice | pricePipe}}</i></span>
+    <ion-buttons end>
+      <button ion-button (click)="onlinePay()">去付款</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

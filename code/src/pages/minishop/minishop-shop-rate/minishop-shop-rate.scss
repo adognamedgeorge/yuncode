@@ -1,0 +1,12 @@
+page-minishop-shop-rate {
+  .star-level{
+    margin: 0;
+  }
+  .col {
+    padding: 0;
+    font-size: 1.4rem;
+  }
+  ion-scroll[scrollY = 'true'] {
+    height: 100%;
+  }
+}

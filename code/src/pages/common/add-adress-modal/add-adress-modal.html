@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button clear (click)="modalClose()">取消</button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>联系人</ion-label>
+      <ion-input placeholder="姓名" [(ngModel)]="item['name']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>电话</ion-label>
+      <ion-input placeholder="手机号码" [(ngModel)]="item['mobile']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>地区</ion-label>
+      <ion-input placeholder="省市区" readonly [(ngModel)]="item['addressSSQ']" (focus)="selectedAddress()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>详细地址</ion-label>
+      <ion-input placeholder="例：G栋503室" [(ngModel)]="item['address']"></ion-input>
+    </ion-item>
+    <ion-item text-center (tap)="checkAddress()">
+      <ion-icon name="dingwei2" color="danger" ></ion-icon>
+      点击设置坐标，可以更精确
+    </ion-item>
+    <ion-item></ion-item>
+  </ion-list>
+  <button ion-button block (click)="save()">保存</button>
+</ion-content>

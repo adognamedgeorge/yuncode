@@ -1,0 +1,82 @@
+page-user-marketing {
+  .scroll-content{
+    background-color: $borderColor
+  }
+  .item-block {
+    margin: 0 !important;
+    padding: 10px !important;
+    border-bottom: 5px solid $borderColor;
+    .item-inner {
+      padding: 0 !important;
+      border: 0 !important;
+    }
+    ion-label {
+      margin: 0 !important;
+    }
+  }
+  .order_title {
+    ion-icon{
+      float: right;
+      line-height: 0;
+    }
+    p{
+      font-size: 1.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 85%;
+      display: inline-block;
+
+    }
+  }
+  dl{
+    display: flex;
+    padding: 10px 0 0;
+    //border-bottom: 1px solid $borderColor;
+  }
+  dt{
+    width: 9rem;
+    img {
+      width: 8rem !important;
+      vertical-align: middle;
+      height: 8rem !important;
+      margin-left: 0.2rem;
+    }
+  }
+  dd{
+    flex: 1;
+    display: flex;
+    .order_info {
+      flex: 1;
+      h3 {
+        //width: 5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      span {
+        font-size: 1.3rem;
+        i{
+          color: $antColor;
+        }
+      }
+    }
+    .order_status {
+      width: 7rem;
+      text-align: center;
+      .button {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        font-size: 1.5rem;
+      }
+      p{
+        color: $antColor;
+      }
+      p:first-child{
+        font-weight: bold;
+        color: black;
+      }
+    }
+  }
+}

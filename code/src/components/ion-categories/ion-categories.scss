@@ -1,0 +1,23 @@
+ion-categories {
+  .categories {
+    .title {
+      font-size: 90%;
+      display: block;
+      //margin-top: 5px;
+    }
+    ion-row {
+      background-color: #efefef;
+      padding: 0;
+    }
+    ion-col {
+      background-color: white;
+      /*border: 1px solid #efefef;*/
+    }
+    .icon {
+      border-radius: 100px;
+      width: 46px;
+      height: 46px;
+      background-size: 2000px;
+    }
+  }
+}

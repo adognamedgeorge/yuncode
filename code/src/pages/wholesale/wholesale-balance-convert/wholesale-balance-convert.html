@@ -1,0 +1,33 @@
+<!--
+  Generated template for the WholesaleBalanceConvertPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>可用余额：{{items.balance | pricePipe}}元</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div ion-item>
+    <ion-label floating>请输入兑换金额</ion-label>
+    <ion-input type="number" [(ngModel)]="price"></ion-input>
+  </div>
+  <p text-right> 温馨提示：最大可兑换金额100元。</p>
+  <ion-buttons end>
+    <button ion-button small outline (click)="exchange(1)">兑换</button>
+    <button ion-button small (click)="exchange(2)">全部兑换</button>
+  </ion-buttons>
+
+  <div class="explain">
+    <h2>使用说明：</h2>
+    <h3>1、余额兑换的用处及使用条件？</h3>
+    <p>  为方便账户余额的使用，可将余额兑换为小于等于100元的优惠券。所兑换的优惠券在下单时可用。</p>
+    <h3>2、兑换的优惠券有效期?</h3>
+    <p>  兑换的优惠券有效期为一年。</p>
+    <h3>3、兑换的优惠券可以在哪里查看?</h3>
+    <p>  兑换成功后,可在<span class="ass" [navPush]="'WholesaleReceiveCouponPage'"> "我的优惠券" </span>中查看。</p>
+  </div>
+</ion-content>

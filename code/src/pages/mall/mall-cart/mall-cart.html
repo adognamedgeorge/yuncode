@@ -1,0 +1,57 @@
+<!--
+  Generated template for the MallCartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>商城购物车</ion-title>
+    <ion-buttons end>
+      <button ion-button color="danger" (click)="deleteCart()">删除</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div  *ngFor="let item of cartList" class="items">
+    <dl>
+      <dt>
+        <ion-checkbox [(ngModel)]="item['checked']" (ionChange)="checked(item)"></ion-checkbox>
+        <img [src]="appService.changeImgUrl(item['imageUrl'], 160)" [navPush]="'MallDetailPage'" [navParams]="{'id': item['itemId']}">
+      </dt>
+      <dd>
+        <h3>{{item['title']}}</h3>
+        <p>{{item['propsMeassage']}}</p>
+        <p class="price">¥{{item['sellPrice'] | pricePipe}}</p>
+        <div class="buy">
+          <button ion-button class="buy_left" (click)="minusProduct(item)">-</button>
+          <div class="buy_center">
+            <input type="tel" readonly [(ngModel)]="item['num']" >
+          </div>
+          <button ion-button (click)="addProduct(item)">+</button>
+        </div>
+      </dd>
+    </dl>
+    <div class="is_del" *ngIf="item.status != 4">
+      <b>商品已下架,请删除</b>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-5>
+        <ion-item>
+          <ion-label>全选</ion-label>
+          <ion-checkbox class="allchecked" [(ngModel)]="allChecked" (ionChange)="allchecked()"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <span>应付: <i>¥ {{allPrice | pricePipe}}</i></span>
+      </ion-col>
+    </ion-row>
+    <ion-buttons end>
+      <button ion-button (click)="submitOrder()">去结算</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

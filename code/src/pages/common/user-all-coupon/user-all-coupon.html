@@ -1,0 +1,92 @@
+<ion-header  no-border>
+  <ion-navbar>
+    <ion-title>我的优惠券</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        蚂蚁小店
+      </ion-segment-button>
+      <!--<ion-segment-button value="s1" (ionSelect)="goToSlide(1)">-->
+        <!--蚂蚁批发-->
+      <!--</ion-segment-button>-->
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="'s0'">
+      <ion-card  *ngFor="let item of products">
+        <ion-card-content>
+          <div class="mycoupon_left">
+            <div class="info">
+              <div class="info_left">
+                <span>¥</span>
+                {{item['denomination'] / 100}}
+              </div>
+              <div class="info_right">
+                <p *ngIf="item['shop_id'] == 0">通用券</p>
+                <p *ngIf="item['shop_id'] != 0">{{item['shopName']}}专用券</p>
+                <p>满¥{{item['use_condition'] / 100}}可用</p>
+              </div>
+            </div>
+            <p class="time">截止至 {{item['end_time']}}</p>
+          </div>
+          <div class="mycoupon_right" (tap)="useCoupon(item)">
+            去 <br>
+            使 <br>
+            用 <br>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+      <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中...">
+      </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <!--<div *ngSwitchCase="'s1'">-->
+      <!--<ion-card  *ngFor="let item of items">-->
+        <!--<ion-card-content class="use" [ngClass]="{'noUse': item.used == 1 || item.used == 2}">-->
+          <!--<div class="mycoupon_left">-->
+            <!--<div class="info">-->
+              <!--<div class="info_left">-->
+                <!--<span>¥</span>-->
+                <!--{{item.value / 100}}-->
+              <!--</div>-->
+              <!--<div class="info_right">-->
+                <!--<p *ngIf="item.type == 1">优惠券</p>-->
+                <!--<p *ngIf="item.type == 2">{{item['brand']['name']}}品牌券</p>-->
+                <!--<p *ngIf="item.type == 3">{{item['vendor']['company']}}供应商券</p>-->
+                <!--<p>满{{item.condition / 100}}可用</p>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<p class="time">截止至 {{item.endtime}}</p>-->
+          <!--</div>-->
+          <!--<div class="mycoupon_right" (tap)="useCoupon(item)" *ngIf="item.used == 0">-->
+            <!--可 <br>-->
+            <!--使 <br>-->
+            <!--用 <br>-->
+          <!--</div>-->
+          <!--<div class="mycoupon_right" *ngIf="item.used == 1" (tap)="useCoupon(item)">-->
+            <!--已 <br>-->
+            <!--使 <br>-->
+            <!--用 <br>-->
+          <!--</div>-->
+          <!--<div class="mycoupon_right" *ngIf="item.used == 2" (tap)="useCoupon(item)">-->
+            <!--已 <br>-->
+            <!--过 <br>-->
+            <!--期 <br>-->
+          <!--</div>-->
+        <!--</ion-card-content>-->
+      <!--</ion-card>-->
+      <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">-->
+        <!--<ion-infinite-scroll-content-->
+          <!--loadingSpinner="bubbles"-->
+          <!--loadingText="加载中...">-->
+        <!--</ion-infinite-scroll-content>-->
+      <!--</ion-infinite-scroll>-->
+    <!--</div>-->
+  </div>
+</ion-content>

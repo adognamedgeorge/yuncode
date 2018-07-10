@@ -1,0 +1,27 @@
+cart {
+  ion-fab {
+    position: fixed;
+  }
+  .fab {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.3rem;
+  }
+  .cart_num {
+    top: 8px;
+    right: 5px;
+    position:absolute;
+    background-color: $antColor;
+    border-radius: 100%;
+    font-size: 1.0rem;
+    color: white;
+    width: 13px;
+    height: 13Px;
+    text-align: center;
+    line-height: 13px;
+  }
+  ion-icon[name='gouwu2']{
+    font-size: 2rem;
+    position: initial;
+  }
+}

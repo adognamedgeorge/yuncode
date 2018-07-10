@@ -1,0 +1,32 @@
+page-wholesale-sales-return-modal {
+  .row {
+    border-bottom: 1px solid $borderColor1;
+  }
+  .goldinfo {
+    .col {
+      padding:5px 0 !important;
+      color: $fontColor;
+    }
+  }
+  .goldHeader {
+    .col {
+      padding:15px 0 !important;
+    }
+  }
+  .item-block {
+    font-size: 1.4rem !important;
+    color: $fontColor;
+    span{
+      display: inline-block;
+      width: 12rem;
+      text-align: right;
+    }
+  }
+  ion-list{
+    border-bottom: 1px solid $borderColor1;
+    margin-bottom: 0 !important;
+  }
+  .switch {
+    display: inline-block;
+  }
+}

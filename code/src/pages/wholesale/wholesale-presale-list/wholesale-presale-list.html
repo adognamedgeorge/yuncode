@@ -1,0 +1,116 @@
+<!--
+  Generated template for the WholesalePresaleListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>预购活动</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        可购买
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        已购买
+      </ion-segment-button>
+      <ion-segment-button value="s2" (ionSelect)="goToSlide(2)">
+        活动中
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content #content>
+  <div [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="'s0'">
+      <ion-list class="card"  *ngFor="let group of getKeys(presaleActive)">
+        <ion-item class="presaleItemHead" >
+          <ion-row>
+            <ion-col col-10 >
+              <h3>
+                {{presaleActive[group]['title']}}
+              </h3>
+              <p>
+                {{presaleActive[group]['use_begin_time']}} — {{presaleActive[group]['use_end_time']}}
+              </p>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button color="danger" small  [navPush]="'WholesalePresaleModalPage'" [navParams]="{'presaleId': presaleActive[group],'wholesaleUserInfo':wholesaleUserInfo}">购买</button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item class="presaleItem">
+          <div class="container" *ngFor="let item of getKeys(presaleActive[group]['items'])">
+            <p>{{presaleActive[group]['items'][item]['product_title']}}</p>
+            <p>
+              <span >规格 : {{presaleActive[group]['items'][item]['spec']}}/{{presaleActive[group]['items'][item]['product_unit']}}</span>
+              <span>数量 : {{presaleActive[group]['items'][item]['amount']}}</span>
+            </p>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'s1'">
+      <ion-list class="card"  *ngFor="let group of buyPresaleItems">
+        <ion-item class="presaleItemHead">
+          <h3>
+            {{group['title']}}
+          </h3>
+          <p>
+            {{group['create_time']}} — {{group['end_time']}}
+          </p>
+        </ion-item>
+        <ion-item class="presaleItem">
+          <div class="container" *ngFor="let item of getKeys(group['items'])">
+            <p>{{group['items'][item]['product_title']}}</p>
+            <p>
+              <span >规格 : {{group['items'][item]['spec']}}/{{group['items'][item]['product_unit']}}</span>
+              <span>数量 : {{group['items'][item]['amount']}}</span>
+            </p>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+    <div *ngSwitchCase="'s2'">
+      <ion-list class="card"  *ngFor="let group of buyPresaleItems">
+        <ion-item class="presaleItemHead">
+          <h3>
+            {{group['title']}}
+          </h3>
+          <p>
+            {{group['create_time']}} — {{group['end_time']}}
+          </p>
+        </ion-item>
+        <ion-item class="presaleItem">
+          <div class="container" *ngFor="let item of getKeys(group['items'])">
+            <p>{{group['items'][item]['product_title']}}</p>
+            <p class="itemInfo">
+              <span >规格 : {{group['items'][item]['spec']}}/{{group['items'][item]['product_unit']}}</span>
+              <span>数量 : {{group['items'][item]['amount']}}</span>
+            </p>
+            <div class="buyButton">
+              <button class="plus mius" (tap) = "decrementPresales(group['items'][item])">-</button>
+              <input type="tel" class="num" [(ngModel)]="group['items'][item]['quantity']">
+              <button class="plus add" (tap) = "addPresale(group['items'][item])">+</button>
+              <button class="buy" (tap) = "addPresaleCart(group['items'][item], group['id'])">购买</button>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))" *ngIf="loading">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

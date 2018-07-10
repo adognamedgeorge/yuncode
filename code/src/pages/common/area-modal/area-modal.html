@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button clear (click)="modalClose()">取消</button>
+    </ion-buttons>
+    <ion-title>选择省市区</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of provinces; let i = index" (click)="selectedPro(item, i)">
+      {{item['name']}}
+      <ul class="city" *ngIf="provIndex == i && cities['length'] >0">
+        <li *ngFor="let item of cities; let k = index" (click)="selectedCity(item, k, $event)">
+          {{item['name']}}
+          <ul class="city" *ngIf="cityIndex == k && districts['length'] >0">
+            <li *ngFor="let item of districts" (click)="selectedDistricts(item, $event)">
+              {{item['name']}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ion-item>
+  </ion-list>
+</ion-content>

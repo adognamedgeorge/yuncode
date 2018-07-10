@@ -1,0 +1,18 @@
+page-member-exchange-detail {
+	.card-title-ios,.card-ios p{
+		text-align:center;
+	}
+	.toolbar-title-md{
+		text-align:center;
+	}
+  .barcodes {
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-top: 50px;
+    img {
+      height: 70px;
+    }
+  }
+}

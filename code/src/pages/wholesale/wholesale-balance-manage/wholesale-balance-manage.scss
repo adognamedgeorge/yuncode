@@ -1,0 +1,16 @@
+page-wholesale-balance-manage {
+  .row {
+    padding: 15px 0;
+    border-bottom: 2px solid $borderColor1;
+  }
+  .col{
+    text-align: center;
+    border-right: 1px solid $borderColor;
+  }
+  .col:last-child {
+    border-right: 0;
+  }
+  p {
+    white-space: normal;
+  }
+}

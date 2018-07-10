@@ -1,0 +1,121 @@
+<ion-header no-border>
+  <ion-navbar>
+   <ion-title>{{shopInfo['title']}}</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only [navPush]="'MinishopSearchPage'" [navParams]="{'shopId': shopId, 'isShopOpen': isShopOpen, 'shopCart': shopCart}">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="toolbarheader">
+    <ion-segment mode="md" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="s0" (ionSelect)="goToSlide(0)">
+        品类
+      </ion-segment-button>
+      <ion-segment-button value="s1" (ionSelect)="goToSlide(1)">
+        店家详情
+      </ion-segment-button>
+      <ion-segment-button value="s2" (ionSelect)="goToSlide(2)">
+        用户评价
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-row>
+    <ion-col col-2 text-center>
+      <ion-icon name="notifications" color="danger"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <marquee behavior="scroll">{{shopInfo['notice']}}</marquee>
+  </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content [ngClass]="{'haveFooter': selectedSegment == 's2'}">
+  <div [ngSwitch]="selectedSegment" class="switch">
+    <div *ngSwitchCase="'s0'" class="switchChild">
+      <page-minishop-shop-list
+        (slectTopCate)="slectTopCate($event)"
+        (slectSecondCate)="slectSecondCate($event)"
+        (slectThirdCate)="slectThirdCate($event)"
+        (infinite)="infinite($event)"
+        (cartInfoLoad)="cartInfoLoad($event)"
+        [shopTopCat]="shopTopCat"
+        [products]="shopItemList"
+        [shopCart]="shopCart"
+        [shopId]="shopId"
+        [isShopOpen]="isShopOpen"
+        [shopSeconndCat]="shopSeconndCat"
+        [shopThirdCat]="shopThirdCat"
+        [loading]="loading"
+      ></page-minishop-shop-list>
+    </div>
+    <div *ngSwitchCase="'s1'" class="switchChild">
+      <page-minishop-shop-info [shopInfo]="shopInfo" [saleItems]="saleItems"></page-minishop-shop-info>
+    </div>
+    <div *ngSwitchCase="'s2'" class="switchChild">
+      <page-minishop-shop-rate
+        [ShopRate]="ShopRate"
+        [loading]="loadingRate"
+        (infinite)="infinite($event)"
+      ></page-minishop-shop-rate>
+    </div>
+  </div>
+
+
+  <!--<ion-slides  (ionSlideWillChange)="onSlideWillChange()">-->
+    <!--<ion-slide>-->
+      <!--<page-minishop-shop-list-->
+        <!--(slectTopCate)="slectTopCate($event)"-->
+        <!--(slectSecondCate)="slectSecondCate($event)"-->
+        <!--(slectThirdCate)="slectThirdCate($event)"-->
+        <!--(infinite)="infinite($event)"-->
+        <!--(cartInfoLoad)="cartInfoLoad($event)"-->
+        <!--[shopTopCat]="shopTopCat"-->
+        <!--[products]="shopItemList"-->
+        <!--[shopCart]="shopCart"-->
+        <!--[shopId]="shopId"-->
+        <!--[isShopOpen]="isShopOpen"-->
+        <!--[shopSeconndCat]="shopSeconndCat"-->
+        <!--[shopThirdCat]="shopThirdCat"-->
+        <!--[loading]="loading"-->
+      <!--&gt;</page-minishop-shop-list>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<page-minishop-shop-info [shopInfo]="shopInfo" [saleItems]="saleItems"></page-minishop-shop-info>-->
+    <!--</ion-slide>-->
+    <!--<ion-slide>-->
+      <!--<page-minishop-shop-rate-->
+        <!--[ShopRate]="ShopRate"-->
+        <!--[loading]="loadingRate"-->
+        <!--(infinite)="infinite($event)"-->
+      <!--&gt;</page-minishop-shop-rate>-->
+    <!--</ion-slide>-->
+  <!--</ion-slides>-->
+</ion-content>
+<ion-footer *ngIf="selectedSegment == 's0'">
+  <ion-row>
+    <ion-col col-8 class="cart" (tap)="openCart()">
+      <ion-icon name="gouwu1"></ion-icon>
+      <span>{{cartNum}}</span>
+      <div>
+        <p class="price">¥{{cartPrice | pricePipe}}</p>
+        <p>另需要配送费{{shopInfo['delivery_fee'] | pricePipe}}元</p>
+      </div>
+    </ion-col>
+    <ion-col class="confirm">
+      <button ion-button color="danger"
+              *ngIf="cartPrice >= shopInfo['minimum_amount']"
+              [disabled]="cartPrice == 0 || !isShopOpen"
+              full [navPush]="'MinishopConfirmPage'"
+              [navParams]="{'shopCart': shopCart, 'shopId': shopId, 'cartTotalPrice': cartPrice}"
+      >结算</button>
+      <button ion-button color="light" *ngIf="cartPrice < shopInfo['minimum_amount']" full >差{{shopInfo['minimum_amount'] - cartPrice  | pricePipe}}起送</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+<ion-footer *ngIf="selectedSegment == 's1'">
+  <button ion-button block (click)="share()">
+    分享店铺
+  </button>
+</ion-footer>
+<div class="backdrop" *ngIf="isBackdrop"></div>

@@ -1,0 +1,32 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-title mode="ios">余额管理</ion-title>
+    <ion-buttons right [navPush]="'WholesaleExplainPage'" [navParams]="{id:2}">
+      <button ion-button icon-only>
+        <ion-icon name="help-circle" color="danger"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-4>
+      <p>{{items.balance | pricePipe}}</p>
+      <p>账户余额</p>
+    </ion-col>
+    <ion-col col-4>
+      <p>{{items.credit_quota | pricePipe}}</p>
+      <p>信用额度</p>
+    </ion-col>
+    <ion-col col-4>
+      <p>{{(items.balance + items.credit_quota) | pricePipe}}</p>
+      <p>可用信用额度</p>
+    </ion-col>
+  </ion-row>
+  <ion-list no-border no-lines>
+    <ion-item *ngFor="let item of bank_list">
+      <h3>银行: {{item.bank}}</h3>
+      <p>账户信息: {{item.account}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button ion-button clear color="danger" (click)="modalClose()">确定</button>
+    </ion-buttons>
+    <ion-title mode="ios">选择优惠券</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="coupon.length">
+    <ion-card-header>
+      优惠券
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let item of coupon" (tap)="selected(item)">
+        <ion-label>
+          ¥{{item.denomination | pricePipe}}
+          <span>
+            满{{item.use_condition | pricePipe}}
+          </span>
+          <p>
+            有效期至{{item.end_time}}
+          </p>
+        </ion-label>
+        <ion-radio value={{item.id}} checked="{{item.selected}}"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

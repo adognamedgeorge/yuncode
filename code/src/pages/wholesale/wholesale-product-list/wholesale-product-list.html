@@ -1,0 +1,60 @@
+<ion-header no-border class="homes">
+  <ion-navbar #header>
+    <div start class="search_nav"  [navPush]="'WholesaleSearchPage'">
+      <ion-icon name="search"></ion-icon>
+      <input type="text" disabled  placeholder="搜索" />
+    </div>
+    <ion-buttons end (click)="openCategories()">
+      <button ion-button class="head_button" >
+        <ion-icon name="sort1"></ion-icon>
+        <span class="sort_title">分类</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="contain">
+    <ion-scroll scrollY="true" class="menus" *ngIf="CategoriesStatus">
+      <ion-list no-lines>
+        <ion-item  button class="menuItem" *ngFor="let c of topCatItems;let i=index" [ngClass]="{'active1': i == top_Index}"  (tap)="selectTopCat(c.id,i)">
+          {{c.name}}
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+    <ion-scroll scrollY="true" #scroll class="items">
+      <ion-scroll scrollX="true" *ngIf="secondCatItems['length'] > 0">
+        <ul [ngStyle]="{'width':secondWidth}">
+          <li *ngFor="let c of secondCatItems;let i=index" text-center >
+            <button ion-button small color="light" [ngClass]="{'active': i == second_Index}" (click)="selectSecondCat(c.id,i)">{{c.cnname}}</button>
+          </li>
+        </ul>
+      </ion-scroll>
+      <ion-scroll scrollX="true" class="searchCate" *ngIf="thirdCatItems['length'] > 0">
+        <ul [ngStyle]="{'width':thirdWidth}">
+          <li *ngFor="let c of thirdCatItems;let i=index" text-center>
+            <button ion-button small color="light"  [ngClass]="{'active': i == third_Index}" (click)="selectThirdCat(c.id,i)">{{c.cnname}}</button>
+          </li>
+        </ul>
+      </ion-scroll>
+      <ion-scroll scrollX="true" class="searchCate" *ngIf="fourCatItems['length'] > 0">
+        <ul [ngStyle]="{'width':fourWidth}">
+          <li *ngFor="let c of fourCatItems;let i=index" text-center>
+            <button ion-button small color="light"  [ngClass]="{'active': i == four_Index}" (click)="selectFourCat(c.id,i)">{{c.name}}</button>
+          </li>
+        </ul>
+      </ion-scroll>
+      <pifa-products [products]="products" [CategoriesStatus]="'WholesaleProductListPage'" [cartInfo]="cartInfo"></pifa-products>
+      <ion-row *ngIf="!loading">
+        <ion-col class="nodata" text-center>
+          没有商品啦 ♪(^∇^*)
+        </ion-col>
+      </ion-row>
+      <ion-row #spinner  *ngIf="loading">
+        <ion-col text-center>
+          <ion-spinner></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </ion-scroll>
+  </div>
+  <cart [comeFrom]="'whosesale'" [cartInfo]="cartInfo"></cart>
+</ion-content>

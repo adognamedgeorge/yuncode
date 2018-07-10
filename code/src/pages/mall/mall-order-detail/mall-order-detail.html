@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>订单详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item class="dl">
+      <p>订单编号 : <span>{{info['id']}}</span></p>
+      <p>收 货 人 : <span> {{info.receiverName}}</span></p>
+      <p>联系方式 : <span> {{info.receiverMobile}}</span></p>
+      <p>收货地址 : <span> {{info.receiverAddress}}</span></p>
+      <p>订单时间 : <span> {{info.createTime}}</span></p>
+    </ion-item>
+    <ion-item class="dl" *ngFor="let item of items" >
+      <div class="contents">
+        <div class="dt" [navPush]="'MallDetailPage'" [navParams]="{'id': item.itemId}">
+          <img [src]="appService.changeImgUrl(item.imageUrl, 160)" />
+        </div>
+        <div class="dd">
+          <h3 [navPush]="'MallDetailPage'" [navParams]="{'id': item.product_id}">{{item.title}}</h3>
+          <p>
+            {{item.skuPropertiesName}}
+          </p>
+          <p class="price">
+            ¥{{item.sellPrice | pricePipe }}  x {{item.num}}
+          </p>
+          <p class="price allPrice">
+            <span>
+              实付：¥{{item.payment | pricePipe}}
+            </span>
+          </p>
+          <p class="buy">
+            <button *ngIf="item['expressType'] && item['refundStatus'] == 1" ion-button (tap)="checked(item)">查看物流</button>
+            <button *ngIf="item['refundStatus'] == 3 || item['refundStatus'] == 2" ion-button color="light">退款中</button>
+            <button *ngIf="item['refundStatus'] == 99" ion-button color="light">退款完成</button>
+          </p>
+        </div>
+      </div>
+    </ion-item>
+    <ion-item class="dl">
+      <ion-row>
+        <ion-col col-4>
+          订单总金额
+        </ion-col>
+        <ion-col text-right>
+          ¥{{info.totalFee | pricePipe}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          支付状态
+        </ion-col>
+        <ion-col text-right>
+          <span *ngIf="info['status'] == '1'">未付款</span>
+          <span *ngIf="info['status'] == '2' || info['status'] == '3' || info['status'] == '4' || info['status'] == '8'">待收货</span>
+          <span *ngIf="info['status'] == '5' || info['status'] == '6' || info['status'] == '7'">交易完成</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          支付方式
+        </ion-col>
+        <ion-col text-right>
+          <span *ngIf="info['payPlatform'] == 'weixinpay'">微信支付</span>
+          <span *ngIf="info['payPlatform'] == 'alipay'">支付宝支付</span>
+        </ion-col>
+      </ion-row>
+      <div *ngFor="let coupon of info['promotions']">
+        <ion-row>
+          <ion-col col-4>
+            {{coupon.promotionName}}
+          </ion-col>
+          <ion-col text-right>
+            - ¥{{coupon.discountFee | pricePipe}}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row *ngIf="info['buyerMessage'] !=''">
+        <ion-col col-4>
+          备注
+        </ion-col>
+        <ion-col text-right>
+          {{info.buyerMessage}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          客服热线
+        </ion-col>
+        <ion-col text-right>
+          0571-86908200
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          实付
+        </ion-col>
+        <ion-col text-right>
+          ¥{{info.payment | pricePipe}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

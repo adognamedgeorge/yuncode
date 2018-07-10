@@ -1,0 +1,78 @@
+page-minishop-shop-cart {
+  height: 60% !important;
+  bottom: 0 !important;
+  top: auto !important;
+  .headerInfo {
+    .del {
+      font-size: 1.4rem !important;
+    }
+    ion-icon {
+
+      color: $fontColor;
+    }
+    ion-icon[name='close-circle'] {
+      text-align: right;
+      font-size: 2rem;
+      height: 25px;
+      width: 25px;
+      line-height: 25px;
+    }
+    ion-icon[name='trash'] {
+      color: $antColor;
+    }
+  }
+  .info {
+    padding: 10px;
+    font-size: 1.3rem;
+    .item-inner, .item-block  {
+      padding: 0 !important;
+    }
+    .item-block {
+      height: 30px;
+    }
+    .row {
+      font-size: 1.4rem;
+      .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .price {
+        color: $antColor;
+      }
+      .buy{
+        text-align: center;
+        width: 70px;
+        display: flex;
+        float: right;
+        button{
+          width:2rem;
+          height: 2rem;
+          font-size: 2rem;
+          -webkit-border-radius: 100%;
+          -moz-border-radius: 100%;
+          border-radius: 100%;
+          font-weight: bold;
+          line-height: 0;
+          margin: 0;
+          padding: 0;
+        }
+        .button-ios {
+          span{
+            padding-bottom: 5px;
+          }
+        }
+        .buy_left{
+          font-size: 2.4rem;
+        }
+        .buy_center{
+          flex: 1;
+        }
+        input{
+          text-align: center;
+          width: 100%;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}

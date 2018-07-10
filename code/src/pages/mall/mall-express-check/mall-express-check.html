@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>物流状态</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="dl">
+    <div class="dt">
+      <img [src]="appService.changeImgUrl(imgUrl, 160)" />
+    </div>
+    <div class="dd">
+      <h3>
+        物流状态：
+        <span *ngIf="items['length']">正在派送 </span>
+        <span *ngIf="items['length'] == 0">正在投递 </span>
+      </h3>
+      <p>
+        快递：{{express['name']}}
+      </p>
+      <p>
+        单号：{{expressOrderNo}}
+      </p>
+    </div>
+  </div>
+  <div class="logistics">
+    <ul *ngIf="items['length'] ==0" >
+      <li >
+        <p style="font-size: 20px;color: darkorange;margin: 70px 0;text-align: center;">正在投递,请耐心等待</p>
+      </li>
+    </ul>
+    <ul class="logistics-info" *ngIf="items['length']" >
+      <li *ngFor="let item of items">
+        <p>{{item['AcceptStation']}}</p>
+        <p>{{item['AcceptTime']}}</p>
+        <span class="logistics-line">
+          <span></span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</ion-content>

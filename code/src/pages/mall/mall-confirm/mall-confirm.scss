@@ -1,0 +1,114 @@
+page-mall-confirm {
+  .item-divider-md {
+    border-bottom: none;
+    border-top:1px solid  #dedede;
+  }
+  ion-item-divider {
+    ion-label {
+      font-size: 1.5rem !important;
+      color: black;
+    }
+  }
+  ion-card {
+    margin: 20px 10px !important;
+    ion-icon {
+      font-size: 3rem;
+      line-height: 4.5rem;
+    }
+    ion-card-content{
+      padding: 10px !important;
+      width: 100%;
+      display: flex;
+      background-color: #E3EEF5;
+
+    }
+    ion-icon:last-child {
+    }
+    div {
+      display: inline-block;
+      flex: 1;
+    }
+  }
+  .item{
+    padding-left: 0 !important;
+    border-bottom:1px solid #f7f7f7 !important;
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+  }
+  ion-label {
+    padding-left: 16px;
+    font-size: 1.3rem;
+    color: $fontColor;
+  }
+  dl {
+    display: flex;
+    dd {
+      h2{
+        font-size: 1.4rem !important;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    dt{
+      width: 8rem;
+      margin-right: 5px;
+      img{
+        width: 100%;
+        height: 8rem;
+      }
+    }
+    dd{
+      flex: 1;
+      width: 0;
+      p:last-child{
+        color: $antColor;
+        span{
+          float: right;
+        }
+      }
+    }
+  }
+  .price span{
+    float: right;
+    color: $antColor;
+  }
+  ion-footer{
+    .toolbar {
+      padding: 0;
+    }
+    ion-buttons {
+      margin: 0;
+      width: 40%;
+    }
+    .bar-button {
+      background-color: red;
+      color: white;
+      width: 100%;
+      height: 44px;
+    }
+    .bar-button-md {
+      height: 56px;
+      margin: 0;
+    }
+    span:last-child{
+      margin-left: 1rem;
+    }
+    i {
+      color: $antColor;
+      font-size: 1.6rem;
+    }
+  }
+}
+.onlinePay{
+  .button-inner{
+    color: #8c8c8c;
+  }
+  .alert-button:last-child{
+    font-weight: normal;
+    span{
+      color: $antColor;
+    }
+  }
+}

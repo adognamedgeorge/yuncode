@@ -1,0 +1,166 @@
+page-wholesale-home {
+  ion-categories {
+    .icon {
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+  .c1 {
+    background-position: -1009px 6px;
+    background-size: 1500px !important;
+  }
+  .c2 {
+    background-position: -1054px 4px;
+    background-size: 1800px !important;
+  }
+  .c3 {
+    background-position: -864px 10px;
+    background-size: 900px !important;
+  }
+  .c4 {
+    background-position: -863px 6px;
+    background-size: 1600px !important;
+  }
+  ion-slides {
+    height: 130px;
+    img {
+      width: 100% !important;
+    }
+  }
+  ion-header{
+    .toolbar-background {
+      background-color: rgba(255, 0, 0, 0);
+    }
+  }
+  .scroll-content{
+    padding-top: 0 !important;
+  }
+  .publicity {
+    //border-top: 5px solid $borderColor ;
+    ion-col {
+      position: relative;
+      border: 1px solid #efefef;
+      border-radius: 2px;
+      padding: 0;
+    }
+  }
+  .t-header {
+    border: none;
+    position: relative;
+    font-size: 1.5rem;
+    padding-left: 20px;
+    ion-label {
+      margin: 8px 8px 8px 0;
+    }
+    ion-icon {
+      vertical-align: text-bottom;
+    }
+  }
+  .use_info {
+    border-top: 5px solid $borderColor !important;
+    ion-label {
+      display: flex;
+    }
+    .info_left {
+      width: 70%;
+    }
+    .info_right {
+      flex: 1;
+      text-align:right;
+    }
+    span {
+      color: $antColor;
+    }
+    button{
+      background-color: $antColor;
+      -webkit-border-radius: 100%;
+      -moz-border-radius: 100%;
+      border-radius: 100%;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      color: #fff;
+      font-size: 1.4rem;
+    }
+  }
+  .announce {
+    background-color: #f7f7f7;
+    padding: 5px 7px;
+    div{
+      background-color: #fff;
+      padding: 5px 10px;
+      border-radius: 100px;
+      display: flex;
+      p{
+        width: 80px;
+        display: inline-block;
+        span{
+          margin-left: -2px;
+          display: inline-block;
+          color: white;
+          padding:0 7px 0 4px;
+          background-color: $antColor;
+          border-top-right-radius: 100px;
+          border-bottom-right-radius: 100px;
+        }
+      }
+      span{
+        flex: 1;
+        color: $fontColor;
+      }
+      .itemsNew {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .dl {
+    display: flex;
+    padding: 10px;
+  }
+
+
+
+  .dt{
+    width: 9.5rem;
+    img {
+      width: 9rem;
+      vertical-align: middle;
+      height: 9rem;
+    }
+  }
+  .dd {
+    flex: 1;
+    width: 0;
+    padding-left: 5px;
+    .price {
+      color: $antColor;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 0;
+      //text-overflow: ellipsis;
+      white-space: normal;
+      //overflow: hidden;
+    }
+  }
+  .buy {
+    margin-top: 5px;
+    text-align: center;
+    button {
+      width: 90%;
+      background-color: transparent;
+      padding: 4px;
+      border-radius: 2px;
+      border: 1px solid $antColor;
+      color: $antColor;
+      margin-bottom: 10px;
+    }
+    .nobuy {
+      border-color: grey;
+      color: grey;
+    }
+  }
+}

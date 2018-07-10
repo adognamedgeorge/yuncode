@@ -1,0 +1,61 @@
+<!-- Generated template for the PifaProductsComponent component -->
+<div class="product" *ngIf="CategoriesStatus == 'WholesaleProductListPage'">
+  <ion-row wrap>
+    <ion-col tappable col-6 *ngFor="let p of products">
+      <div  class="pic1"  [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':p.id}">
+        <img [src]="appService.changeImgUrl(p.pic_url, 300)" >
+      </div>
+      <p class="titles"  [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':p.id}">{{p.title}}</p>
+      <div class="list-price" *ngIf="!p['noShow']">
+        <div>
+          <span class="price-new" *ngIf="price">
+            <i>￥</i>{{p.sell_price }}
+            <i>/{{p.unit}}</i>
+          </span>
+          <span class="price-new" *ngIf="!price">
+            <i>￥</i>{{p.sell_price | pricePipe}}
+            <i>/{{p.unit}}</i>
+          </span>
+        </div>
+      </div>
+      <p class="sort">规格：{{p.spec}}</p>
+      <!--<div class="buy">-->
+        <!--<a class="buy_left">-</a>-->
+        <!--<div class="buy_center">-->
+          <!--<input type="text" readonly value="0" name="num">-->
+        <!--</div>-->
+        <!--<a class="buy_right">+</a>-->
+      <!--</div>-->
+      <div class="buy" *ngIf="p['stock_info']">
+        <button (click)="addCart(p, cartInfo)" *ngIf="p['stock_info']['stock'] >= p['min_sold_num'] || p['stock_info']['warehouse_stock'] >= p['min_sold_num']">
+          购买
+        </button>
+        <button class="nobuy" *ngIf="!(p['stock_info']['stock'] >= p['min_sold_num'] || p['stock_info']['warehouse_stock'] >= p['min_sold_num'])">
+          售罄
+        </button>
+      </div>
+      <div class="buy" *ngIf="!p['stock_info']">
+        <button (click)="addCart(p, cartInfo)" *ngIf="p['stock'] >= p['min_sold_num']">
+          购买
+        </button>
+        <button class="nobuy" *ngIf="!(p['stock'] >= p['min_sold_num'])">
+          售罄
+        </button>
+      </div>
+    </ion-col>
+  </ion-row>
+</div>
+<div class="product" *ngIf="CategoriesStatus != 'WholesaleProductListPage'">
+  <ion-row wrap>
+    <ion-col tappable col-6 *ngFor="let p of products"  [navPush]="'WholesaleDetailPage'" [navParams]="{'itemId':p.product_list.id}">
+      <div  class="pic1">
+        <img [src]="appService.changeImgUrl(p['product_list']['pic_url'] , 300)">
+      </div>
+      <p class="titles">{{p.product_list.title}}</p>
+      <p class="sort">规格：{{p.product_list.spec}}</p>
+      <div class="list-price" *ngIf="priceShow">
+        <span class="price-new"><i>￥</i>{{p.product_list.sell_price | pricePipe}}</span>
+      </div>
+    </ion-col>
+  </ion-row>
+</div>

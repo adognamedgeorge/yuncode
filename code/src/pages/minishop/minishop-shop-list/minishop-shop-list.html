@@ -1,0 +1,56 @@
+  <div class="contain">
+    <ion-scroll scrollY="true" class="menus">
+      <ion-list>
+        <ion-item  button class="menuItem" *ngFor="let c of shopTopCat;let i=index" [ngClass]="{'active1': i == chooseTopIndex}"  (click)="chooseCate(c,i)">
+          {{c['title']}}
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+    <ion-scroll scrollY="true" #scroll class="items">
+      <ion-scroll scrollX="true" *ngIf="shopSeconndCat != '' ">
+        <ul [ngStyle]="{'width': shopSeconndCat['length'] * 88 + 'px'}">
+          <li *ngFor="let c of shopSeconndCat; let i=index" text-center >
+            <button ion-button small color="light" [ngClass]="{'active': i == chooseSecondeIndex}"  (click)="chooseSecondeCate(c,i)">{{c.title}}</button>
+          </li>
+        </ul>
+      </ion-scroll>
+      <ion-scroll scrollX="true" class="searchCate" *ngIf="shopThirdCat != ''">
+        <ul [ngStyle]="{'width':shopThirdCat['length'] * 88 + 'px'}">
+          <li *ngFor="let c of shopThirdCat; let i=index" text-center>
+            <button ion-button small color="light" [ngClass]="{'active': i == chooseThirdIndex}"  (click)="chooseThirdCate(c,i)">{{c.title}}</button>
+          </li>
+        </ul>
+      </ion-scroll>
+      <dl *ngFor="let item of products">
+        <dt>
+          <img *ngIf="item['pic_url']" [src]="appService.changeImgUrl(item['pic_url'], 220)">
+          <img *ngIf="!item['pic_url']" src="http://i8.yunmayi.com/upload/2017/12/11/e6344457e2e578279d24baf1f523bb2f.pngXXXXX!!!!!_160x160.jpg">
+        </dt>
+        <dd>
+          <h3>{{item['title']}}</h3>
+          <p>{{item['sub_title']}}</p>
+          <p class="price">¥{{item['sell_price'] | pricePipe}}</p>
+          <div class="buy" *ngIf="item['stock_num'] > 0 && isShopOpen">
+            <button ion-button  color="light" class="buy_left" (click)="minusProduct(item, shopCart)" *ngIf="shopCart[item['id']]">-</button>
+            <div class="buy_center">
+              <input type="text" readonly [(ngModel)]="shopCart[item['id']]['inCartQuantity']" name="num" *ngIf="shopCart[item['id']]">
+            </div>
+            <button ion-button (click)="addProduct(item, shopCart, $event)" >+</button>
+          </div>
+          <div class="buy noNum" *ngIf="!item['stock_num'] > 0 && isShopOpen">
+            售罄
+          </div>
+        </dd>
+      </dl>
+      <ion-row *ngIf="!loading">
+        <ion-col class="nodata" text-center>
+          没有商品啦 ♪(^∇^*)
+        </ion-col>
+      </ion-row>
+      <ion-row #spinner  *ngIf="loading">
+        <ion-col text-center>
+          <ion-spinner></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </ion-scroll>
+  </div>

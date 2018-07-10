@@ -1,0 +1,101 @@
+<ion-header #header>
+  <ion-navbar >
+    <ion-title (tap)="openLocationModal()">
+      <ion-icon name="dingwei"></ion-icon>
+      {{addressLocation ? addressLocation : '定位中失败,请手动定位'}}
+      <ion-icon name="jiantouxia"></ion-icon>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content (ionScroll)="scrollEvent($event)" #scrollContent>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-slides autoplay="3000" loop="true"  speed="2000" pager="true">
+    <ion-slide *ngFor='let item of slides'>
+      <img src="{{item}}">
+    </ion-slide>
+  </ion-slides>
+  <div class="openShop" [navPush]="'MinishopOpenShopPage'">
+    <button ion-button color="danger" outline block >我要开店</button>
+  </div>
+  <form action="javascript:return true;" #searchForm>
+    <ion-searchbar placeholder="搜索店铺" mode="md" #searchbar (ionInput)="getSearch($event)" ></ion-searchbar>
+    <button (click)="search()"></button>
+  </form>
+  <div class="shop_list">
+    <!--<ion-searchbar-->
+      <!--[(ngModel)]="searchText"-->
+      <!--[showCancelButton]="true"-->
+      <!--(keyup.enter)="oppp()"-->
+     <!--&gt;-->
+    <!--</ion-searchbar>-->
+
+    <ion-item-divider class="t-header" color="light" text-center>
+      附近小店
+      <ion-icon name="fujin" color="dark"></ion-icon>
+    </ion-item-divider>
+      <dl class="cart_list" *ngFor="let shop of nearShop" (tap)="goShop(shop['id'])">
+        <dt>
+          <img *ngIf="shop['logo_url']" [src]="appService.changeImgUrl(shop['logo_url'], 160)">
+          <img *ngIf="!shop['logo_url']" src="http://dd.v2.yunmayi.com/app_sources/img/home/shop-logo.jpg" >
+        </dt>
+        <dd>
+          <h2>{{shop['title']}}</h2>
+          <div class="star-level" *ngIf="shop['rate_count'] > 0">
+            <span class="highlight-star" [ngStyle]="{'width': shop['service_score'] * 10 + '%'}"></span>
+          </div>
+          <div class="level" *ngIf="shop['rate_count'] == 0">
+            暂未收到评价
+          </div>
+          <b class="serviceScore" *ngIf="shop['rate_count'] > 0">{{(shop['service_score'] / 2).toFixed(2)}}</b>
+          <b class="coupon-tip" *ngIf="shop['max_return_cash'] > 0">券</b>
+          <div class="delivery_info">
+            <span>
+            <b>{{shop['minimum_amount'] | pricePipe}}</b>
+            元起送 ㅣ
+          </span>
+            <span>
+            配送费
+            <b>{{shop['delivery_fee'] |pricePipe}}</b>
+            元
+          </span>
+          </div>
+          <div>
+            距您
+            <b color="primary">{{shop['distance']}}</b>
+            <span *ngIf="shop['thousandShow']">千</span>
+            米
+          </div>
+          <div class="activity">
+            <div *ngIf="shopReductionList[shop['id']]">
+              <div *ngFor="let reduction of shopReductionList[shop['id']]">
+                <p *ngIf="reduction['is_return_cash'] == 0">
+                  在线支付满{{reduction['total_price'] | pricePipe}}减{{reduction['decrease_amount'] | pricePipe}}
+                </p>
+                <p *ngIf="reduction['is_return_cash'] == 1 &&  shop['max_return_cash'] > 1000">
+                  在线支付满{{reduction['total_price'] | pricePipe}}减{{reduction['decrease_amount'] | pricePipe}}
+                </p>
+              </div>
+            </div>
+            <div *ngIf="shopCouponList[shop['id']]">
+              <div *ngFor="let coupon of shopCouponList[shop['id']]">
+                <p *ngIf="coupon['is_return_cash'] == 0">
+                  在线支付{{coupon['send_condition'] | pricePipe}}元，送{{coupon['send_num']}}张{{coupon['denomination'] | pricePipe}}元优惠券
+                </p>
+                <p *ngIf="coupon['is_return_cash'] == 1 &&  shop['max_return_cash'] > 1000">
+                  在线支付{{coupon['send_condition'] | pricePipe}}元，送{{coupon.send_num}}张{{coupon['denomination'] | pricePipe}}元优惠券
+                </p>
+              </div>
+            </div>
+          </div>
+        </dd>
+      </dl>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="loading">
+    <ion-infinite-scroll-content
+      loadingText="加载中..."
+      [loadingSpinner]="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

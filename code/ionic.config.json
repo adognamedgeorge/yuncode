@@ -1,0 +1,8 @@
+{
+  "name": "云蚂蚁",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

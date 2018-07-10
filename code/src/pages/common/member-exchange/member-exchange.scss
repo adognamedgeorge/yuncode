@@ -1,0 +1,36 @@
+page-member-exchange {
+	.segment-ios .segment-button:last-of-type,.segment-ios .segment-button:first-of-type,.segment-ios-danger .segment-button{
+		border:none;
+		color:black;
+	}
+	.segment-ios-danger .segment-button.segment-activated{
+		background-color:transparent;
+		color:#f53d3d;
+		border:none;
+		border-bottom:2px solid #f53d3d;
+	}
+  ion-list[inset] {
+    margin: 0 !important;
+  }
+  h2{
+    font-size: 1.4rem !important;
+    white-space:normal;
+  }
+  .btn {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+	.list span{
+		font-size:1.5rem;
+	}
+	.list-ios[inset] .item{
+		padding: 10px;
+	}
+	.list-ios[inset] > .item:last-child, .list-ios[inset] > .item-wrapper:last-child .item{
+		border-bottom:1px solid #c8c7cc;
+	}
+	.item-ios [item-right], .item-ios [item-end]{
+		margin:0;
+		margin-left:8px;
+	}
+}

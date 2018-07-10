@@ -1,0 +1,62 @@
+<ion-header>
+  <div class="headerInfo">
+    <div class="left">
+      <img  [src]="appService.changeImgUrl(items['pic_url'], 200)" alt="加载中">
+    </div>
+    <div class="right">
+      <p>¥{{items.sell_price | pricePipe}} / {{items.unit}}</p>
+      <p *ngIf="items.limit_buy_num > 0">限购{{items.limit_buy_num}}{{items.unit}}</p>
+      <p class="priceAll" *ngIf="!items.presaleList['length']">
+        总价:
+        <span>¥{{items.sell_price * items.quantity | pricePipe}}</span>
+      </p>
+    </div>
+    <ion-icon name="close-circle" (tap)="modalClose()"></ion-icon>
+  </div>
+  <ion-row text-center *ngIf="items.presaleList['length']">
+    <ion-col col-4>预售活动</ion-col>
+    <ion-col col-3>剩余商品</ion-col>
+    <ion-col col-5>购买数量</ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <ion-row text-center class="buyDetail" *ngFor="let item of items.presaleList" >
+    <ion-col col-4 class="presaleTitle">{{item.title}}</ion-col>
+    <ion-col col-3 class="presaleTitle">{{item.amount}}</ion-col>
+    <ion-col col-5 class="presaleNum">
+      <i (tap)="decrementNum(item)">-</i>
+      <input type="tel" [(ngModel)]="item.quantity" readonly >
+      <i (tap)="addNum(item)">+</i>
+    </ion-col>
+  </ion-row>
+  <ion-list class="buyDetail" *ngIf="!items.presaleList['length']">
+    <!--<ion-item *ngFor="let i of [1,2,3,4,5,6]">-->
+      <!--<h3>{{i}}</h3>-->
+      <!--<div>-->
+        <!--<span  *ngFor="let k of [11,22,33,44,55,6]" >{{k}}</span>-->
+      <!--</div>-->
+    <!--</ion-item>-->
+    <ion-item  class="buy">
+      <ion-row>
+        <ion-col col-6 class="title">
+          购买数量
+        </ion-col>
+        <ion-col col-6 class="num">
+          <i (tap)="decrementNum(items)">-</i>
+          <input type="tel" [(ngModel)]="items.quantity" readonly>
+          <i (tap)="addNum(items)">+</i>
+        </ion-col>
+      </ion-row>
+      <ion-row class="batch">
+        <ion-col (tap)="addNum(items,5)">+5</ion-col>
+        <ion-col (tap)="addNum(items,10)">+10</ion-col>
+        <ion-col (tap)="addNum(items,20)">+20</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button color="danger" full (tap)="confirm()">确定</button>
+  </ion-toolbar>
+</ion-footer>

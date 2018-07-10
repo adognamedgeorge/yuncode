@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>申请小店</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="top">
+    <img src="http://i1.yunmayi.com/upload/2017/06/29/689a0f41f6a70692830a5b981b060c82.jpg" />
+  </div>
+  <ion-row class="tophead">
+    <ion-col col-9 class="left">
+      <div class="imgLeft">
+        <img src="http://i1.yunmayi.com/upload/2017/06/29/649961e0180bfca49da6acf3cd3ddf1f.jpg">
+      </div>
+      <p>100米内没有店铺</p>
+      <p>申请免费开店</p>
+    </ion-col>
+    <ion-col class="right" text-right="">
+      <a href="tel:4000692666">
+        <img src="http://i1.yunmayi.com/upload/2017/06/29/7cf0b478118652ee5ba15b29ae7e5424.jpg">
+      </a>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <span class="ass">*</span>
+        姓名
+      </ion-label>
+      <ion-input [(ngModel)]="item['name']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span class="ass">*</span>
+        手机号
+      </ion-label>
+      <ion-input placeholder="注册成功,默认为登陆账号" [(ngModel)]="item['tel']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>店铺电话</ion-label>
+      <ion-input placeholder="格式:区号+电话号码" [(ngModel)]="item['mobile']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span class="ass">*</span>
+        小店名称
+      </ion-label>
+      <ion-input [(ngModel)]="item['shopName']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span class="ass">*</span>
+        地区
+      </ion-label>
+      <ion-input placeholder="省市区" readonly [(ngModel)]="item['addressSSQ']" (tap)="selectedAddress()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span class="ass">*</span>
+        详细地址
+      </ion-label>
+      <ion-input placeholder="例：G栋503室" [(ngModel)]="item['address']"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-row class="foot">
+    <ion-col col-6 text-left>
+      <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yunmayi.app.minishop.seller">
+        商家版APP下载
+      </a>
+    </ion-col>
+    <ion-col col-6 [navPush]="'MinishopOpenshopCoursePage'" text-right>
+      开店流程
+    </ion-col>
+  </ion-row>
+  <p class="zz">注：云蚂蚁批发用户可直接登陆蚂蚁小店掌柜后台。</p>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="confirm()">申请</button>
+</ion-footer>

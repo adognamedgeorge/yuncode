@@ -1,0 +1,135 @@
+page-wholesale-cart {
+  .list-md {
+    margin: 0;
+  }
+  .item-divider-md {
+    border-bottom: none;
+    border-top:1px solid  #dedede;
+    span {
+      color: $antColor;
+    }
+  }
+  .dl {
+    padding-left: 0;
+  }
+  .dl .item-inner {
+    padding-right: 0 !important;
+    border-color: $borderColor !important;
+  }
+  .dl ion-label{
+    padding: 10px;
+    margin: 0;
+  }
+  .contents {
+    display: flex;
+  }
+  .is_del {
+    background: #f2f2f2;
+    border-color: #e5e5e5;
+  }
+  .un_discounts {
+    background: #f2f2f2;
+    border-color: #e5e5e5;
+  }
+  .discounts, .un_discounts, .is_del {
+    white-space: normal;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    b {
+      color: $antColor;
+    }
+  }
+  .discounts{
+    border: 1px solid #e4ecf2;
+    background-color: #f0f9ff;
+  }
+  .dt{
+    width: 9.5rem;
+    img {
+      width: 9rem;
+      vertical-align: middle;
+      height: 9rem;
+    }
+  }
+  .dd{
+    flex: 1;
+    width: 0;
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 0;
+      //text-overflow: ellipsis;
+      white-space: normal;
+      //overflow: hidden;
+    }
+    .price{
+      font-size: 1.3rem;
+      color: $antColor;
+      margin-bottom: 0.5rem;
+    }
+    .allPrice {
+      display: inline-block;
+    }
+    .buy{
+      text-align: right;
+      float: right;
+      button{
+        width:2rem;
+        height: 2rem;
+        font-size: 2rem;
+        background-color: $antColor;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        color: #fff;
+        font-weight: bold;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+      }
+      .buy_left{
+        font-size: 2.4rem;
+      }
+      .buy_center{
+        width: 3rem;
+        display: inline-block;
+        text-align: center;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+
+  ion-footer{
+    .toolbar {
+      padding: 0;
+    }
+    ion-buttons {
+      margin: 0;
+      width: 40%;
+    }
+    .bar-button {
+      background-color: red;
+      color: white;
+      width: 100%;
+      height: 44px;
+    }
+    .bar-button-md {
+      height: 56px;
+      margin: 0;
+    }
+    span:last-child{
+      margin-left: 1rem;
+    }
+    i {
+      color: $antColor;
+      font-size: 1.6rem;
+    }
+  }
+  .allActive {
+    margin: 10px;
+  }
+}

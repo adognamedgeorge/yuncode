@@ -1,0 +1,22 @@
+page-wholesale-order-returngoods {
+  span {
+    display: inline-block;
+    width: 9rem;
+  }
+  input {
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 2rem;
+    background-color: transparent;
+  }
+  .edit {
+    background-color: $borderColor;
+  }
+  .item-block {
+    font-size: 1.4rem;
+    color: $antColor;
+  }
+  b {
+    color: $antColor;
+  }
+}

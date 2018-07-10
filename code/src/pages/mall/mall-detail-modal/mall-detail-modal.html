@@ -1,0 +1,48 @@
+<ion-header>
+  <div class="headerInfo">
+    <div class="left">
+      <img [src]="appService.changeImgUrl(items['imageUrl'], 160)" alt="加载中">
+    </div>
+    <div class="right">
+      <p *ngIf="!skuPrice">¥{{items['sellPrice'] | pricePipe}}</p>
+      <p *ngIf="skuPrice">¥{{skuPrice | pricePipe}}</p>
+      <p *ngIf="!hintMessage">请选择</p>
+      <p *ngIf="hintMessage">{{hintMessage}}</p>
+      <p class="priceAll">
+        总价:
+        <span *ngIf="!skuPrice">¥{{items['sellPrice'] * items['quantity'] | pricePipe}}</span>
+        <span *ngIf="skuPrice">¥{{skuPrice * items['quantity'] | pricePipe}}</span>
+      </p>
+    </div>
+    <ion-icon name="close-circle" (tap)="modalClose()"></ion-icon>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-list class="buyDetail">
+    <ion-item *ngFor="let items of propsList">
+      <h3>{{items['name']}}</h3>
+      <div >
+        <span *ngFor="let item of items['values']" (tap)="checked(item, items)" [ngClass]="{'checked': item.checked}">
+          {{item.vname}}
+        </span>
+      </div>
+    </ion-item>
+    <ion-item  class="buy">
+      <ion-row>
+        <ion-col col-6 class="title">
+          购买数量
+        </ion-col>
+        <ion-col col-6 class="num">
+          <i (tap)="decrementNum(items)">-</i>
+          <input type="tel" [(ngModel)]="items['quantity']" >
+          <i (tap)="addNum(items)">+</i>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button color="danger" full (tap)="confirm()">确定</button>
+  </ion-toolbar>
+</ion-footer>

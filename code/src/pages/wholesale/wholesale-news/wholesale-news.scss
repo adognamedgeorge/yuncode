@@ -1,0 +1,12 @@
+page-wholesale-news {
+  .col:first-child{
+    width: 65%;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .col {
+    padding:0 !important;
+  }
+}

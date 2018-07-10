@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button clear (click)="modalClose()">取消</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button clear (click)="confirmMapLocation()">确定</button>
+    </ion-buttons>
+    <ion-title>地图</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div id="container" style="position:absolute;width:100%;top:0;bottom:0;"></div>
+</ion-content>

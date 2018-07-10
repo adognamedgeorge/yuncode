@@ -1,0 +1,58 @@
+<ion-content>
+  <div text-center>
+    <img  *ngIf="shopInfo['logo_url']" [src]="appService.changeImgUrl(shopInfo['logo_url'], 160)">
+    <img *ngIf="!shopInfo['logo_url']" src="http://dd.v2.yunmayi.com/app_sources/img/home/shop-logo.jpg" >
+  </div>
+  <div class="star-level" *ngIf="shopInfo['rate_count'] > 0" text-center>
+    <!--<p class="highlight-star" [ngStyle]="{'width': shopInfo['service_score'] * 10 + '%'}"></p>-->
+  </div>
+  <p *ngIf="shopInfo['rate_count'] == 0" text-center>暂未收到评价</p>
+  <div *ngIf="saleItems['full_send_promo_list']" class="sale" text-center>
+    <div *ngFor="let reduction of saleItems['full_send_promo_list'][shopInfo['id']]">
+      <p *ngIf="reduction['is_return_cash'] == 0">
+        在线支付满{{reduction['total_price'] | pricePipe}}减{{reduction['decrease_amount'] | pricePipe}}
+      </p>
+      <p *ngIf="reduction['is_return_cash'] == 1 &&  shopInfo['max_return_cash'] > 1000">
+        在线支付满{{reduction['total_price'] | pricePipe}}减{{reduction['decrease_amount'] | pricePipe}}
+      </p>
+    </div>
+  </div>
+  <div *ngIf="saleItems['coupon_promo_list']" class="sale">
+    <div *ngFor="let coupon of saleItems['coupon_promo_list'][shopInfo['id']]">
+      <p *ngIf="coupon['is_return_cash'] == 0">
+        在线支付{{coupon['send_condition'] | pricePipe}}元，送{{coupon['send_num']}}张{{coupon['denomination'] | pricePipe}}元优惠券
+      </p>
+      <p *ngIf="coupon['is_return_cash'] == 1 &&  shopInfo['max_return_cash'] > 1000">
+        在线支付{{coupon['send_condition'] | pricePipe}}元，送{{coupon.send_num}}张{{coupon['denomination'] | pricePipe}}元优惠券
+      </p>
+    </div>
+  </div>
+  <ion-row class="price">
+    <ion-col col-6>
+      <p>{{shopInfo['minimum_amount'] | pricePipe}}元</p>
+      <span>起送价</span>
+    </ion-col>
+    <ion-col col-6>
+      <p>{{shopInfo['delivery_fee'] |pricePipe}}元</p>
+      <span>配送费</span>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item-divider color="light">店铺信息</ion-item-divider>
+    <ion-item>
+      店铺地址：
+      <span>{{ shopInfo['city_name'] }} {{ shopInfo['address'] }}</span>
+    </ion-item>
+    <ion-item>
+      营业时间：
+      <span>
+        {{ shopInfo['day_open_time'] && shopInfo['day_close_time'] ? shopInfo['day_open_time'] + "-" + shopInfo['day_close_time'] : "" }}
+        {{ shopInfo['night_open_time'] && shopInfo['night_close_time'] ? shopInfo['night_open_time'] + "-" + shopInfo['night_close_time'] : "" }}
+      </span>
+    </ion-item>
+    <ion-item>
+      联系方式：
+      <span>{{shopInfo['mobile']}}</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

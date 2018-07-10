@@ -1,0 +1,63 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-hot-code-push-plugin": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-alipay-v2": {
+      "APP_ID": "2015121600986717",
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-app-update": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-appversion": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-wechat": {
+      "WECHATAPPID": "wx6f78c0964351ea05",
+      "PACKAGE_NAME": "com.yunmayi.android"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.yunmayi.android"
+    }
+  }
+}

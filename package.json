@@ -1,0 +1,13 @@
+{
+  "name": "yunmayi-app",
+  "version": "0.0.1",
+  "author": "Yunmayi Team",
+  "homepage": "http://www.yunmayi.com/",
+  "private": true,
+  "scripts": {
+    "serve": "./bin/serve.sh",
+    "pack": "./bin/pack.sh",
+    "platform-build": "./bin/platform-build.sh"
+  },
+  "description": "Yunmayi App"
+}
